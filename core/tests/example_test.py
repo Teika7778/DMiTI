@@ -9,8 +9,8 @@ class MyTestCase(unittest.TestCase):
         n2 = Natural([2, 1])
         m = ex.Module()
         n3 = m.execute([n1, n2])[0]
-
-        self.assertEqual(n3.numbers, n1.numbers)  # add assertion here
+        n2.numbers[0] = 3
+        self.assertNotEqual(n2.numbers, n3.numbers)  # add assertion here
 
 
 if __name__ == '__main__':

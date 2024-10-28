@@ -30,7 +30,7 @@ class Natural(DataType):
 
     # Метод для упрощения объекта
     def simplify(self):
-        while self.numbers and self.numbers[-1] == 0:
+        while len(self.numbers) > 1 and self.numbers[-1] == 0:
             self.numbers.pop()
 
 
@@ -50,8 +50,7 @@ class Integer(DataType):
 
     # Метод для упрощения объекта
     def simplify(self):
-        while self.natural.numbers and self.natural.numbers[-1] == 0:
-            self.natural.numbers.pop()
+        self.natural.simplify()
 
 
 # Класс рационального числа
@@ -87,13 +86,11 @@ class Polynomial(DataType):
     # Строковое представление многочлена
     def __str__(self):
         terms = []
-        max_degree = len(self.coefficients) - 1
 
         for i, coef in enumerate(self.coefficients):
             if str(coef) == "0":  # пропуск нулевых коэффициентов
                 continue
-            cur_degree = max_degree - i
-            term = f"{str(coef)}" + (f"x^{cur_degree}" if cur_degree > 1 else ("x" if cur_degree == 1 else ""))
+            term = f"{str(coef)}" + (f"x^{i}" if i > 1 else ("x" if i == 1 else ""))
             terms.append(term)
 
         return ' + '.join(terms).replace(" + -", " - ")
@@ -102,3 +99,8 @@ class Polynomial(DataType):
     def simplify(self):
         for coef in self.coefficients:
             coef.simplify()
+
+        while len(self.coefficients) > 1 and str(self.coefficients[-1].numerator) == '0':
+            self.coefficients.pop()
+
+

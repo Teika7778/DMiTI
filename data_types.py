@@ -26,11 +26,12 @@ class Natural(DataType):
 
     # Строковое представление натурального числа
     def __str__(self):
-        pass
+        return ''.join(map(str, self.numbers[::-1]))
 
     # Метод для упрощения объекта
     def simplify(self):
-        pass
+        while self.numbers and self.numbers[-1] == 0:
+            self.numbers.pop()
 
 
 # Класс целого числа
@@ -45,11 +46,12 @@ class Integer(DataType):
 
     # Строковое представление целого числа
     def __str__(self):
-        pass
+        return ('' if self.is_positive else '-') + str(self.natural)
 
     # Метод для упрощения объекта
     def simplify(self):
-        pass
+        while self.natural.numbers and self.natural.numbers[-1] == 0:
+            self.natural.numbers.pop()
 
 
 # Класс рационального числа
@@ -66,11 +68,11 @@ class Rational(DataType):
 
     # Строковое представление рационального числа
     def __str__(self):
-        pass
+        return '0' if self.numerator.natural.numbers == [0] else str(self.numerator) if self.denominator.numbers == [1] else f"{str(self.numerator)}/{str(self.denominator)}"
 
-    # Метод для упрощения объекта
     def simplify(self):
-        pass
+        self.numerator.simplify()
+        self.denominator.simplify()
 
 
 # Класс многочлена с рациональными коэффициентами
@@ -84,8 +86,19 @@ class Polynomial(DataType):
 
     # Строковое представление многочлена
     def __str__(self):
-        pass
+        terms = []
+        max_degree = len(self.coefficients) - 1
+
+        for i, coef in enumerate(self.coefficients):
+            if str(coef) == "0":  # пропуск нулевых коэффициентов
+                continue
+            cur_degree = max_degree - i
+            term = f"{str(coef)}" + (f"x^{cur_degree}" if cur_degree > 1 else ("x" if cur_degree == 1 else ""))
+            terms.append(term)
+
+        return ' + '.join(terms).replace(" + -", " - ")
 
     # Метод для упрощения объекта
     def simplify(self):
-        pass
+        for coef in self.coefficients:
+            coef.simplify()

@@ -9,17 +9,23 @@ class COM_NN_D_test(unittest.TestCase):
     def test_number_is_positive(self):
         n1 = Natural([0, 1])
         n2 = Integer(n1)
-        self.assertEqual(self.module.execute([n2]), [2])
+        result = self.module.execute([n2])
+        expected = Natural([2])
+        self.assertEqual(result[0].numbers, expected.numbers)
 
     def test_number_is_negative(self):
         n1 = Natural([0, 1])
         n2 = Integer(n1, False)
-        self.assertEqual(self.module.execute([n2]), [1])
+        result = self.module.execute([n2])
+        expected = Natural([1])
+        self.assertEqual(result[0].numbers, expected.numbers)
 
     def test_numbers_is_zero(self):
         n1 = Natural([0])
         n2 = Integer(n1)
-        self.assertEqual(self.module.execute([n2]), [0])
+        result = self.module.execute([n2])
+        expected = Natural([0])
+        self.assertEqual(result[0].numbers, expected.numbers)
 
     def test_invalid_arguments_length(self):
         with self.assertRaises(ValueError) as context:

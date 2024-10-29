@@ -8,6 +8,7 @@ class ADD_NN_N(gm.AbstractModule):
         self.module = COM_NN_D()
     def execute(self, args):  
         # args должны быть списками, содержащими цифры, записанные в обратном порядке
+        # проверка данных не проводится, так как будет вызываться метод сравнения чисел, который включает проверку
         carry = 0  #перенос
         result = []
         if self.module.execute(args)[0].numbers == [2]: #первое больше второго

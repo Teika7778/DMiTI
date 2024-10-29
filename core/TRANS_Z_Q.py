@@ -13,6 +13,6 @@ class TRANS_Z_Q(gm.AbstractModule):
         # Создаём объект класса Natural для знамянателя и обьект класса Rational, представляющий дробь z/1
         denominator = Natural([1])
         rational_number = Rational(numerator, denominator)
-        return rational_number
+        return [rational_number]
     def reference(self) -> str:
         pass

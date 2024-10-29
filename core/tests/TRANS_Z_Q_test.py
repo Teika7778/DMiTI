@@ -9,7 +9,7 @@ class TRANS_Z_Q_test(unittest.TestCase):
         #проверка для положительного целого числа
         integer = Integer(Natural([1, 2, 3]), is_positive=True)
         rational = Rational(integer, Natural([1]))
-        result = module.execute([integer])
+        result = module.execute([integer])[0]
         self.assertEqual(result.numerator.natural.numbers, rational.numerator.natural.numbers)  # Проверяем, что совпадают знамянатели дробей
 
     def test_invalid_type(self):
@@ -21,7 +21,7 @@ class TRANS_Z_Q_test(unittest.TestCase):
         module = TRANS_Z_Q()
         integer = Integer(Natural([1, 2, 3]), is_positive=True) # создаем обьект класса Integer
         rational = Rational(integer, Natural([1]))
-        result = module.execute([integer])  # Получаем массив с глубокой копией
+        result = module.execute([integer])[0]  # Получаем массив с глубокой копией
         result.numerator.natural.numbers.append(4)  # Изменяем результат, добавляя новое значение
 
         # Проверяем, что измененный результат не равен оригинальному natural

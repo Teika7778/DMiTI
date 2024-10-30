@@ -11,9 +11,9 @@ class POZ_Z_D(gm.AbstractModule):
             raise ValueError("The number isn`t integer")
 
         if len(args[0].natural.numbers) and args[0].natural.numbers[-1] == 0: # проверяем длину натурального числа и значение
-            return [0]                                   # последней цифры, если натуральное число равно 0, возвращаем 0
+            return [Natural([0])]                                  # последней цифры, если натуральное число равно 0, возвращаем 0
         else:                                            # если натуральное число не равно 0:
-            return [2] if args[0].is_positive else [1]   # если знак положительный, возвращаем 2, иначе 1
+            return [Natural([2])] if args[0].is_positive else [Natural([1])]   # если знак положительный, возвращаем 2, иначе 1
 
     def reference(self) -> str:
         pass

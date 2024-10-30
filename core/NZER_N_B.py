@@ -8,8 +8,8 @@ class NZER_N_B(gm.AbstractModule):
         if not (isinstance(args[0], Natural)):  # проверка на тип данных
             raise ValueError()
         if (len(args[0].numbers)==1) and (args[0].numbers == [0]): # если одна цифра и она равна 0
-            return False
-        return True
+            return [False]
+        return [True]
 
     def reference(self) -> str:
         pass

@@ -8,10 +8,10 @@ class TestNZERNB(unittest.TestCase):
         self.module = NZER_N_B()
 
     def test_valid_non_zero_number(self):
-        self.assertTrue(self.module.execute([Natural([5])]) )  # Ожидаем True, так как 5 не равно 0
+        self.assertTrue(self.module.execute([Natural([5])])[0])  # Ожидаем True, так как 5 не равно 0
 
     def test_valid_zero_number(self):
-        self.assertFalse(self.module.execute([Natural([0])]))  # Ожидаем False, так как число равно 0
+        self.assertFalse(self.module.execute([Natural([0])])[0])  # Ожидаем False, так как число равно 0
 
     def test_invalid_argument_count(self):
         # Проверка на количество аргументов

@@ -1,6 +1,6 @@
 import unittest
 from data_types import *
-from TRANS_Q_Z import TRANS_Q_Z
+from core.TRANS_Q_Z import TRANS_Q_Z
 
 
 class TRANS_Q_Z_test(unittest.TestCase):
@@ -9,7 +9,7 @@ class TRANS_Q_Z_test(unittest.TestCase):
         #проверка для положительного целого числа
         integer = Integer(Natural([1,2,3]), is_positive = True)
         rational = Rational(integer, Natural([1]))
-        result = module.execute([rational])
+        result = module.execute([rational])[0]
         self.assertEqual(result.natural.numbers, integer.natural.numbers)  # Проверяем, что совпадают знамянатели дробей
 
     def test_invalid_type(self):
@@ -21,7 +21,7 @@ class TRANS_Q_Z_test(unittest.TestCase):
         module = TRANS_Q_Z()
         integer = Integer(Natural([1, 2, 3]), is_positive=True) # создаем обьект класса Integer
         rational = Rational(integer, Natural([1]))
-        result = module.execute([rational])  # Получаем массив с глубокой копией
+        result = module.execute([rational])[0]  # Получаем массив с глубокой копией
         result.natural.numbers.append(4)  # Изменяем результат, добавляя новое значение
 
         # Проверяем, что измененный результат не равен оригинальному natural

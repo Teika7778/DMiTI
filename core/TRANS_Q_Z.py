@@ -14,7 +14,7 @@ class TRANS_Q_Z(gm.AbstractModule):
             raise ValueError("Invalid data type: must be reduced rational")
         # Создаём объект класса Integer из знамянателя
         result_integer = Integer(Natural(rational.numerator.natural.numbers), rational.numerator.is_positive)
-        return result_integer
+        return [result_integer]
     
     def reference(self) -> str:
         pass

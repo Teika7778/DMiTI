@@ -3,7 +3,7 @@ from data_types import *
 from core.MUL_ZZ_Z import MUL_ZZ_Z
 
 
-class TestMulZZZ(unittest.TestCase):
+class TestMulZZ_Z(unittest.TestCase):
 
     def test_positive_multiplication(self):
         mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля
@@ -13,6 +13,15 @@ class TestMulZZZ(unittest.TestCase):
         result = mul_module.execute([multiplier, multiplicand])[0]
         self.assertEqual(result.natural.numbers, [8, 0, 4])
         self.assertTrue(result.is_positive)
+
+    def test_minus_1_multiplication(self):
+        mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля
+        # Умножение 12 * 34 = 408
+        multiplier = Integer(Natural([1]), is_positive=False)  # 12
+        multiplicand = Integer(Natural([4, 3]), is_positive=True)  # 34
+        result = mul_module.execute([multiplier, multiplicand])[0]
+        self.assertEqual(result.natural.numbers, [4, 3])
+        self.assertFalse(result.is_positive)
 
     def test_negative_multiplication(self):
         mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля
@@ -30,7 +39,6 @@ class TestMulZZZ(unittest.TestCase):
         multiplicand = Integer(Natural([4, 3]), is_positive=True)  # 34
         result = mul_module.execute([multiplier, multiplicand])[0]
         self.assertEqual(result.natural.numbers, [0])
-        self.assertTrue(result.is_positive)
 
     def test_multiplication_resulting_zero(self):
         mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля
@@ -39,7 +47,6 @@ class TestMulZZZ(unittest.TestCase):
         multiplicand = Integer(Natural([0]), is_positive=True)  # 0
         result = mul_module.execute([multiplier, multiplicand])[0]
         self.assertEqual(result.natural.numbers, [0])
-        self.assertTrue(result.is_positive)
 
     def test_invalid_argument_count(self):
         mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля

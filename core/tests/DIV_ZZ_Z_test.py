@@ -7,6 +7,33 @@ class DIV_ZZ_Z_test(unittest.TestCase):
     def setUp(self):
         self.module = DIV_ZZ_Z()
 
+    def test_dividing_the_positive_by_the_positive_without_remainder(self):
+        n1 = Integer(Natural([0, 1]), True)
+        n2 = Integer(Natural([5]), True)
+        result = self.module.execute([n1, n2])
+        self.assertEqual(result[0].natural.numbers, [2])  # 10 // 5 = 2
+        self.assertEqual(result[0].is_positive, True)
+
+    def test_dividing_the_negative_by_the_negative_without_remainder(self):
+        n1 = Integer(Natural([6, 1]), False)
+        n2 = Integer(Natural([4]), False)
+        result = self.module.execute([n1, n2])
+        self.assertEqual(result[0].natural.numbers, [4])  # -16 // -4 = 4
+        self.assertEqual(result[0].is_positive, True)
+
+    def test_dividing_the_positive_by_the_negative_without_remainder(self):
+        n1 = Integer(Natural([5, 3]), True)
+        n2 = Integer(Natural([7]), False)
+        result = self.module.execute([n1, n2])
+        self.assertEqual(result[0].natural.numbers, [5])  # 35 // -7 = -5
+        self.assertEqual(result[0].is_positive, False)
+
+    def test_dividing_the_negative_by_the_positive_without_remainder(self):
+        n1 = Integer(Natural([2, 2]), False)
+        n2 = Integer(Natural([1, 1]), True)
+        result = self.module.execute([n1, n2])
+        self.assertEqual(result[0].natural.numbers, [2])  # -22 // 11 = -2
+        self.assertEqual(result[0].is_positive, False)
     def test_dividing_the_positive_by_the_positive(self):
         n1 = Integer(Natural([1, 2]))
         n2 = Integer(Natural([5]))

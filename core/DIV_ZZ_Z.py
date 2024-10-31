@@ -5,6 +5,7 @@ from core.ABS_Z_N import ABS_Z_N  # Абсолютная величина чис
 from core.POZ_Z_D import POZ_Z_D  # Определение положительности числа
 ### раскоменьтить from core.DIV_NN_N import DIV_NN_N #  Неполное частное от деления первого натурального числа на второе с остатком
 from core.ADD_1N_N import ADD_1N_N  # Добавление 1 к натуральному числу
+### from core.MOD_NN_N import MOD_NN_N
 
 
 #  Частное от деления целого на целое (делитель отличен от нуля)
@@ -15,6 +16,7 @@ class DIV_ZZ_Z(gm.AbstractModule):
         self.poz_z_d = POZ_Z_D()
 ### раскоменьтить       self.div_nn_n = DIV_NN_N()
         self.add_1n_n = ADD_1N_N()
+###     self.mod_nn_n = MOD_NN_N()
 
     def execute(self, args):
         if len(args) != 2:  # проверка на количество аргументов
@@ -31,14 +33,18 @@ class DIV_ZZ_Z(gm.AbstractModule):
 #/// удалить, когда будет DIV_NN_N
         test1 = ''
         test2 = ''
+        remainder = False
         for item in num1[0].numbers:
             test1 += str(item)
         for item in num2[0].numbers:
             test2 += str(item)
+        if int(test1[::-1]) % int(test2[::-1]) != 0:
+            remainder = True
         num3 = int(test1[::-1]) // int(test2[::-1])
         num3 = [int(x) for x in str(num3)]
         num3 = Natural(num3[::-1])
         result = copy.deepcopy(Integer(num3))
+
 #/// удалить, когда будет DIV_NN_N
 
 
@@ -47,8 +53,14 @@ class DIV_ZZ_Z(gm.AbstractModule):
         # если делимое и делитель отрицательные -> остаток отрицательный
         # => если делимое отрицательное, то остаток отрицательный, нужно прибавить 1
         # частному, чтобы избежать отрицательного остатка
-        if not args[0].is_positive:
-            result.natural = self.add_1n_n.execute([result.natural])[0]
+###        if not (len(self.mod_nn_n([num1, num2])[0].numbers) == 0 and self.mod_nn_n([num1, num2])[0].numbers[-1] == 0):
+###            if not args[0].is_positive:
+###                result.natural = self.add_1n_n.execute([result.natural])[0]
+
+        if remainder:
+            if not args[0].is_positive:
+                result.natural = self.add_1n_n.execute([result.natural])[0]
+
 
         if not (len(result.natural.numbers) == 1 and result.natural.numbers[-1] == 0):  # если частное не равно нулю
             # если делимое положительное, а делитель отрицательный

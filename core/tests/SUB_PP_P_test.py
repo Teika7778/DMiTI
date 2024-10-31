@@ -45,7 +45,11 @@ class SUB_PP_P_test(unittest.TestCase):
             Rational(Integer(Natural([0])), Natural([1]))  # 0
         ]
         P4 = Polynomial(coef4)
-        expected_zero_poly = Polynomial([0])  # 0
+
+        coeff = [
+            Rational(Integer(Natural([0])), Natural([1]))  #0
+        ]
+        expected_zero_poly = Polynomial(coeff)  # 0
         result = self.sub_pp.execute([P3, P4])
         self.assertEqual(result.str(), expected_zero_poly.str())
 

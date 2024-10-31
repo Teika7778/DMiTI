@@ -3,7 +3,7 @@ from data_types import *
 import copy
 
 
-class LEAD_P_Q(gm.AbstractModule):
+class LED_P_Q(gm.AbstractModule):
     def execute(self, args):
         if not len(args) == 1:  # Проверка на получение единственного аргумента
             raise ValueError("Improper arguments: function takes only 1 arg")

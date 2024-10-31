@@ -16,8 +16,8 @@ class SUB_PP_P(gm.AbstractModule):
 
         for i in range(max_len):
             # подтягиваем равное количество коэффициентов
-            coef1 = p1.coefficients[i] if i < len(p1.coefficients) else Rational(Integer(Natural([0])), Natural([1]))
-            coef2 = p2.coefficients[i] if i < len(p2.coefficients) else Rational(Integer(Natural([0])), Natural([1]))
+            coef1 = p1.coefficients[i] if i < len(p1.coefficients) else Rational(Integer(Natural([0]), True), Natural([1]))
+            coef2 = p2.coefficients[i] if i < len(p2.coefficients) else Rational(Integer(Natural([0]), True), Natural([1]))
 
             # вычитание коэффициентов
             result_coef = self.sub_q.execute([coef1, coef2])

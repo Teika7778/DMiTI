@@ -55,7 +55,12 @@ class DIV_NN_Dk(gm.AbstractModule):
         for i in range(2, 11):  # пробегаем все цифры, но т.к. будет отслеживаться переполнение, то берем на 1 больше
             accum = ADD_NN_N().execute([accum, divider])[0] # на каждой итерации прибавляем к счетчику делитель
             if COM_NN_D().execute([nepon, accum])[0].numbers[0] == 1: # если переполнение
-                return MUL_Nk_N().execute([Natural([i - 1]), Natural([m - len(nepon.numbers)])])   # пред. цифра
+                n = m - len(nepon.numbers)
+                shift = []  # массив цифр n, заполненный в обратном порядке
+                while n > 0:
+                    shift.append(n % 10)
+                    n //= 10
+                return MUL_Nk_N().execute([Natural([i - 1]), Natural(shift)])  # пред. цифра
                 # не забываем домножить на 10^{сдвиг между nepon и делимым}
 
     def reference(self) -> str:

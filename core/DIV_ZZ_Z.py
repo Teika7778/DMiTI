@@ -56,11 +56,11 @@ class DIV_ZZ_Z(gm.AbstractModule):
 ###        if not (len(self.mod_nn_n([num1, num2])[0].numbers) == 0 and self.mod_nn_n([num1, num2])[0].numbers[-1] == 0):
 ###            if not args[0].is_positive:
 ###                result.natural = self.add_1n_n.execute([result.natural])[0]
-
+# /// удалить, когда будет DIV_NN_N
         if remainder:
             if not args[0].is_positive:
                 result.natural = self.add_1n_n.execute([result.natural])[0]
-
+# /// удалить, когда будет DIV_NN_N
 
         if not (len(result.natural.numbers) == 1 and result.natural.numbers[-1] == 0):  # если частное не равно нулю
             # если делимое положительное, а делитель отрицательный

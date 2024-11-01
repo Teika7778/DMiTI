@@ -15,6 +15,12 @@ class MOD_PP_P(gm.AbstractModule):
         self.sub = SUB_PP_P()
 
     def execute(self, args):
+        # проверка поданных аргументов
+        if len(args) != 2:
+            raise ValueError("Function MOD_PP_P takes only 2 args.")
+        if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
+            raise ValueError("Invalid data type in MOD_PP_P: must be Polynomial.")
+        
         # находим частное, умножаем на делитель и отнимаем полученный полином от делимого
         div_pol = self.div.execute(args)
         mul_for_sub_pol = self.mul.execute([args[1], div_pol])

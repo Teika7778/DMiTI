@@ -1,3 +1,4 @@
+import copy
 from core.DIV_NN_Dk import DIV_NN_Dk
 from core.COM_NN_D import COM_NN_D
 from core.MUL_NN_N import MUL_NN_N
@@ -21,11 +22,11 @@ class DIV_NN_N(gm.AbstractModule):
         if not isinstance(args[1], Natural):  # второй аргумент не Natural
             raise ValueError("Invalid data type: second arg must be natural")
 
-        divider = args[1]  # делитель
+        divider = Natural(copy.deepcopy(args[1].numbers))  # делитель
         if divider.numbers[-1] == 0:  # деление на 0
             raise ValueError("Invalid division: division by zero")
 
-        divisible = args[0]  # делимое
+        divisible = Natural(copy.deepcopy(args[0].numbers))  # делимое
         quotient = Natural([0])  # частное
         while COM_NN_D().execute([divisible, divider])[0].numbers[0] != 1:  # пока делимое больше либо равно делителя
             subquotient = DIV_NN_Dk().execute([divisible, divider])[0]  # первый разряд частного с нужным кол-вом нулей

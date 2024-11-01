@@ -1,10 +1,10 @@
 import unittest
 from data_types import *
-from core.DIV_NN_N import DIV_NN_N
+from core.MOD_NN_N import MOD_NN_N
 
-class DIV_NN_N_test(unittest.TestCase):
+class MOD_NN_N_test(unittest.TestCase):
     def test_invalid_args(self):  # проверка выброса исключений, если:
-        module = DIV_NN_N()
+        module = MOD_NN_N()
         # список аргументов не list
         args1 = (Natural([1, 2, 3]), Natural([5, 6]))
         self.assertRaises(ValueError, module.execute, args1)
@@ -22,24 +22,24 @@ class DIV_NN_N_test(unittest.TestCase):
         self.assertRaises(ValueError, module.execute, args4)
 
     def test_valid_args(self):
-        module = DIV_NN_N()
+        module = MOD_NN_N()
         #  общие случаи
-        args1 = [Natural([9]), Natural([3])]
+        args1 = [Natural([7, 3, 2]), Natural([8, 1])]
         res1 = module.execute(args1)[0]
         self.assertEqual(res1.numbers, Natural([3]).numbers)
 
-        args2 = [Natural([3, 3]), Natural([8])]
+        args2 = [Natural([7, 7]), Natural([1, 1])]
         res2 = module.execute(args2)[0]
-        self.assertEqual(res2.numbers, Natural([4]).numbers)
+        self.assertEqual(res2.numbers, Natural([0]).numbers)
 
-        args3 = [Natural([6, 2, 1]), Natural([1, 1])]
+        args3 = [Natural([1, 1, 1]), Natural([9, 3])]
         res3 = module.execute(args3)[0]
-        self.assertEqual(res3.numbers, Natural([1, 1]).numbers)
+        self.assertEqual(res3.numbers, Natural([3, 3]).numbers)
 
         # делимое меньше делителя
         args4 = [Natural([3, 3]), Natural([0, 0, 1])]
         res4 = module.execute(args4)[0]
-        self.assertEqual(res4.numbers, Natural([0]).numbers)
+        self.assertEqual(res4.numbers, Natural([3, 3]).numbers)
 
         args5 = [Natural([0]), Natural([0, 0, 1])]
         res5 = module.execute(args5)[0]

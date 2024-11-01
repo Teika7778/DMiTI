@@ -8,6 +8,12 @@ class SUB_PP_P(gm.AbstractModule):
         self.sub_q = SUB_QQ_Q()
 
     def execute(self, args):
+        # проверка поданных аргументов
+        if len(args) != 2:
+            raise ValueError("Function SUB_PP_P takes only 2 args.")
+        if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
+            raise ValueError("Invalid data type in SUB_PP_P: must be Polynomial.")
+        
         # сравниваем длины полиномов, чтобы взять большую для вычитания
         p1 = args[0]
         p2 = args[1]

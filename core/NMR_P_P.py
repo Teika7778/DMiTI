@@ -15,6 +15,12 @@ class NMR_P_P(gm.AbstractModule):
         self.div = DIV_PP_P()
 
     def execute(self, args):
+        # проверка поданных аргументов
+        if len(args) != 1:
+            raise ValueError("Function NMR_P_P takes only 1 arg.")
+        if not (isinstance(args[0], Polynomial)):
+            raise ValueError("Invalid data type in NMR_P_P: must be Polynomial.")
+        
         pol = args[0]
         # находим производную
         der_pol = self.der.execute(args)

@@ -11,7 +11,7 @@ class MUL_QQ_Q(gm.AbstractModule):
         if not len(args) == 2:
             raise ValueError("Improper arguments: function takes 2 arg")
         if not (isinstance(args[0], Rational) and isinstance(args[1], Rational)):
-            raise ValueError("Invalid data type: must be rational")
+            raise ValueError("Invalid data type:  must be rational")
         result = Rational(self.mul_zz_z.execute([args[0].numerator, args[1].numerator])[0], self.mul_zz_z.mul_nn_n.execute([args[0].denominator, args[1].denominator])[0])
         return [result]
     

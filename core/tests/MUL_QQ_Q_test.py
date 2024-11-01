@@ -64,7 +64,7 @@ class Mul_QQ_Q(unittest.TestCase):
         first_numerator = Integer(Natural([5])) # 5
         first_denominator = Natural([7]) # 7
         first_rational = Rational(first_numerator, first_denominator) # 5/7
-        invalid_argument = "Hellow Sergey Pozdkov"
+        invalid_argument = "Hellow  Sergey Pozdkov"
         with self.assertRaises(ValueError):
             self.mul_module.execute([first_rational, invalid_argument]) # неправильный аргумент  
 

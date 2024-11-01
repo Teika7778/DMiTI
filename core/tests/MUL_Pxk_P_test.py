@@ -49,14 +49,14 @@ class MUL_Pxk_P_test(unittest.TestCase):
             self.mul_module.execute([multiplier]) # Передаем только один аргумент
         
     def test_invalid_argument_type(self):
-        # Проверка на неправильное число аргументов
+        # Проверка на неправильный тип аргументов
         zero_coef = Rational(Integer(Natural([7, 1])), Natural([0, 1])) # 17/10
         first_coef = Rational(Integer(Natural([0])), Natural([1])) # 0
         third_coef = Rational(Integer(Natural([3])), Natural([1])) #3
         multiplier = Polynomial([zero_coef, first_coef, third_coef])
         invalid_argument = "Hellow Sergey Pozdkov"
         with self.assertRaises(ValueError):
-            self.mul_module.execute([multiplier]) # Передаем незпрааильынй аргумент
+            self.mul_module.execute([multiplier, invalid_argument]) # Передаем незпрааильынй аргумент
 
 if __name__ == "__main__":
     unittest.main()

@@ -8,6 +8,11 @@ class DER_P_P(gm.AbstractModule):
         self.module = MUL_QQ_Q()
 
     def execute(self, args):
+        # проверка поданных аргументов
+        if len(args) != 1:
+            raise ValueError("Function DER_P_P takes only 1 arg.")
+        if not (isinstance(args[0], Polynomial):
+            raise ValueError("Invalid data type in DER_P_P: must be Polynomial.")
         # берём полином и также создаём массив коэффициентов
         p = args[0]
         result_coefficients = []

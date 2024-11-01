@@ -23,14 +23,22 @@ class DIV_PP_P(gm.AbstractModule):
         self.sub = SUB_PP_P()
 
     def execute(self, args):
+        # проверка поданных аргументов
+        if len(args) != 2:
+            raise ValueError("Function DIV_PP_P takes only 2 args.")
+        if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
+            raise ValueError("Invalid data type in DIV_PP_P: must be Polynomial.")
+        
         pol1, pol2 = args
         # если степень числителя меньше степени знаменателя
         if self.deg.execute(pol1) < self.deg.execute(pol2):
             return Polynomial([Rational(Integer(Natural([0])), Natural([1]))])
+            
         # если степень числителя больше или равна
         # находим степень k, домножив на которую делитель, получим многочлен той же степени
         k = len(pol1.coefficients) - len(pol2.coefficients)
         result_coefficients = []
+        
         # в цикле делаем как бы деление столбиком 0<=i<=k
         for i in range(k, -1, -1):
             # домножив, получаем нужную степень

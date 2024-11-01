@@ -45,7 +45,7 @@ class MOD_PP_P_test(unittest.TestCase):
     def test_division_with_zero(self):
         coef1 = [
             Rational(Integer(Natural([2]), True), Natural([1])),  # 2
-            Rational(Integer(Natural([1]), True), Natural([11]))   # 1/11
+            Rational(Integer(Natural([1]), True), Natural([11]))  # 1/11
         ]
         p1 = Polynomial(coef1)   # 1/11x + 2
         coef2 = [

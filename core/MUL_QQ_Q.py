@@ -17,14 +17,3 @@ class MUL_QQ_Q(gm.AbstractModule):
     
     def reference(self) -> str:
         pass
-first_numerator = Integer(Natural([1])) # 1
-first_denominator = Natural([2]) # 10
-first_rational = Rational(first_numerator, first_denominator) # 12/10
-second_numerator = Integer(Natural([0])) # 100
-second_denominator = Natural([2]) # 2
-second_rational = Rational(second_numerator, second_denominator) #100/2
-A = MUL_QQ_Q()
-first_numerator = Integer(Natural([0, 5])) # 1
-second_numerator = Integer(Natural([0])) # 0
-result = A.mul_zz_z.execute([first_numerator, second_numerator])
-print(result[0])

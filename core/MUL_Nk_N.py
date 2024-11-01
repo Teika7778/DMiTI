@@ -13,6 +13,7 @@ class MUL_Nk_N(gm.AbstractModule):
         for i in range(len(args[1].numbers)):  # проходит по списку цифр натурального числа k
             result.numbers = args[1].numbers[i] * 10**i * [0] + result.numbers  # Дописывается число нулей в соответсвии
             # с разрядом и цифрой данного разряда
+        result.simplify()
         return [result]
 
     def reference(self) -> str:

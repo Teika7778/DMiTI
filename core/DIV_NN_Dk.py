@@ -20,11 +20,11 @@ class DIV_NN_Dk(gm.AbstractModule):
         if not isinstance(args[1], Natural):  # второй аргумент не Natural
             raise ValueError("Invalid data type: second arg must be natural")
 
-        divider = args[1]  # делитель
+        divider = Natural(copy.deepcopy(args[1].numbers))  # делитель
         if divider.numbers[-1] == 0:  # деление на 0
             raise ValueError("Invalid division: division by zero")
 
-        divisible = args[0]  # делимое
+        divisible = Natural(copy.deepcopy(args[0].numbers))  # делимое
         compare = COM_NN_D().execute([divisible, divider])[0] # результат сравнения
         if compare.numbers[0] == 1: # если второе строго больше первого
             raise ValueError("Invalid division: divider must be less than divisible")

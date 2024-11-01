@@ -4,6 +4,12 @@ from core.MUL_ZZ_Z import MUL_ZZ_Z
 
 
 class TestMulZZ_Z(unittest.TestCase):
+    def test_zero_positive_multiplication(self):
+        mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля
+        multiplier = Integer(Natural([1]), is_positive=True)  # 1
+        multiplicand = Integer(Natural([0]), is_positive=True)  # 0
+        result = mul_module.execute([multiplier, multiplicand])[0]
+        self.assertEqual(str(result), '0')
 
     def test_positive_multiplication(self):
         mul_module = MUL_ZZ_Z()  # Создаем экземпляр модуля

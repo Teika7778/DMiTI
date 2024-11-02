@@ -21,7 +21,7 @@ class MOD_PP_P_test(unittest.TestCase):
         coeff = [
             Rational(Integer(Natural([2]), True), Natural([1]))  # 2
         ]
-        result = self.module.execute([p1, p2])
+        result = self.module.execute([p1, p2])[0]
         self.assertEqual(result.coefficients, coeff)
 
     def test_derivative_quadratic(self):
@@ -39,7 +39,7 @@ class MOD_PP_P_test(unittest.TestCase):
         coeff = [
             Rational(Integer(Natural([3]), True), Natural([1]))   # 3
         ]
-        result = self.module.execute([p1, p2])
+        result = self.module.execute([p1, p2])[0]
         self.assertEqual(result.coefficients, coeff)
 
     def test_division_with_zero(self):
@@ -56,7 +56,7 @@ class MOD_PP_P_test(unittest.TestCase):
         coeff = [
             Rational(Integer(Natural([0]), True), Natural([1]))  # 0
         ]
-        result = self.module.execute([p1, p2])
+        result = self.module.execute([p1, p2])[0]
         self.assertEqual(result.coefficients, coeff)
 
     if __name__ == '__main__':

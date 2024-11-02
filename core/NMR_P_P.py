@@ -30,4 +30,4 @@ class NMR_P_P(gm.AbstractModule):
         result_polynomial = self.div.execute([pol, gcf_pol_der_pol])
         result_polynomial.simplify()
 
-        return result_polynomial
+        return [result_polynomial]

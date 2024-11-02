@@ -10,12 +10,12 @@ class MOD_PP_P_test(unittest.TestCase):
     def test_derivative_linear(self):
         coef1 = [
             Rational(Integer(Natural([3]), True), Natural([1])),  # 3
-            Rational(Integer(Natural([2]), True), Natural([11]))  # 2/11
+            Rational(Integer(Natural([2]), True), Natural([1, 1]))  # 2/11
         ]
         p1 = Polynomial(coef1)   # 2/11x + 1
         coef2 = [
             Rational(Integer(Natural([1]), True), Natural([1])),  # 1
-            Rational(Integer(Natural([2]), True), Natural([11]))  # 2/11
+            Rational(Integer(Natural([2]), True), Natural([1, 1]))  # 2/11
         ]
         p2 = Polynomial(coef1)  # 2/11x + 1
         coeff = [
@@ -45,12 +45,12 @@ class MOD_PP_P_test(unittest.TestCase):
     def test_division_with_zero(self):
         coef1 = [
             Rational(Integer(Natural([2]), True), Natural([1])),  # 2
-            Rational(Integer(Natural([1]), True), Natural([11]))  # 1/11
+            Rational(Integer(Natural([1]), True), Natural([1, 1]))  # 1/11
         ]
         p1 = Polynomial(coef1)   # 1/11x + 2
         coef2 = [
             Rational(Integer(Natural([2]), True), Natural([1])),  # 2
-            Rational(Integer(Natural([1]), True), Natural([11]))  # 1/11
+            Rational(Integer(Natural([1]), True), Natural([1, 1]))  # 1/11
         ]
         p2 = Polynomial(coef2)  # 1/11x + 2
         coeff = [

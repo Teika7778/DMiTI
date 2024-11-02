@@ -21,11 +21,11 @@ class DER_P_P_test(unittest.TestCase):
     def test_derivative_linear(self):
         coef = [
             Rational(Integer(Natural([3])), Natural([1])),  # 3
-            Rational(Integer(Natural([2])), Natural([11]))  # 2/11
+            Rational(Integer(Natural([2])), Natural([1, 1]))  # 2/11
         ]
         p = Polynomial(coef)   # 2/11x + 3
         coeff = [
-            Rational(Integer(Natural([2]), True), Natural([11]))  # 2/11
+            Rational(Integer(Natural([2]), True), Natural([1, 1]))  # 2/11
         ]
         result = self.module.execute([p])[0]
         self.assertEqual(result.coefficients, coeff)

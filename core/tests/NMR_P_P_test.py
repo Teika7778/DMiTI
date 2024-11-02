@@ -24,23 +24,23 @@ class NMR_P_P_test(unittest.TestCase):
     def test_derivative_linear(self):
         coef = [
             Rational(Integer(Natural([9]), True), Natural([1])),  # 9
-            Rational(Integer(Natural([1]), False), Natural([988]))  # -1/988
+            Rational(Integer(Natural([1]), False), Natural([8, 8, 9]))  # -1/988
         ]
         p = Polynomial(coef)  # -1/988x+9
         coeff = [
             Rational(Integer(Natural([9]), True), Natural([1])),  # 9
-            Rational(Integer(Natural([1]), False), Natural([988]))  # -1/988
+            Rational(Integer(Natural([1]), False), Natural([8, 8, 9]))  # -1/988
         ]
         result = self.module.execute([p])[0]  # -1/988x+9
         self.assertEqual(result.coefficients, coeff)
 
     def test_division_with_zero(self):
         coef = [
-            Rational(Integer(Natural([9]), True), Natural([21]))  # 9/21
+            Rational(Integer(Natural([9]), True), Natural([1, 2]))  # 9/21
         ]
         p = Polynomial(coef)  # 9/21
         coeff = [
-            Rational(Integer(Natural([9]), True), Natural([21]))  # 9/21
+            Rational(Integer(Natural([9]), True), Natural([1, 2]))  # 9/21
         ]
         result = self.module.execute([p])[0]  # 9/21
         self.assertEqual(result.coefficients, coeff)

@@ -26,7 +26,7 @@ class MOD_ZZ_Z(gm.AbstractModule):
         multiplication = self.mull_zz_z.execute([quotient[0], args[1]])  # умножаем частное на делитель
         result = self.sub_zz_z.execute([args[0], multiplication[0]])  # вычитаем из делимого и получаем остаток
 
-        return result
+        return [result]
 
     def reference(self) -> str:
         pass

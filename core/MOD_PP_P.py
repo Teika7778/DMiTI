@@ -27,4 +27,4 @@ class MOD_PP_P(gm.AbstractModule):
         result_polynomial = self.sub.execute([args[0], mul_for_sub_pol])
         result_polynomial.simplify()
 
-        return result_polynomial
+        return [result_polynomial]

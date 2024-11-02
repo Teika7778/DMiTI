@@ -59,4 +59,4 @@ class DIV_PP_P(gm.AbstractModule):
         result_polynomial = Polynomial(result_coefficients)
         result_polynomial.simplify()
 
-        return result_polynomial
+        return [result_polynomial]

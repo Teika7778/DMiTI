@@ -15,7 +15,7 @@ class DER_P_P_test(unittest.TestCase):
         coeff = [
             Rational(Integer(Natural([0]), True), Natural([1]))  # 0
         ]
-        result = self.module.execute([p])
+        result = self.module.execute([p])[0]
         self.assertEqual(result.coefficients, coeff)
 
     def test_derivative_linear(self):
@@ -27,7 +27,7 @@ class DER_P_P_test(unittest.TestCase):
         coeff = [
             Rational(Integer(Natural([2]), True), Natural([11]))  # 2/11
         ]
-        result = self.module.execute([p])
+        result = self.module.execute([p])[0]
         self.assertEqual(result.coefficients, coeff)
 
     def test_derivative_quadratic(self):
@@ -41,7 +41,7 @@ class DER_P_P_test(unittest.TestCase):
             Rational(Integer(Natural([2]), True), Natural([1])),  # 2
             Rational(Integer(Natural([3]), False), Natural([1]))  # -3
         ]
-        result = self.module.execute([p])
+        result = self.module.execute([p])[0]
         self.assertEqual(result.coefficients, coeff)
 
     def test_derivative_cubic(self):
@@ -57,7 +57,7 @@ class DER_P_P_test(unittest.TestCase):
             Rational(Integer(Natural([6]), True), Natural([1])),  # 6
             Rational(Integer(Natural([4]), False), Natural([1]))  # -4
         ]
-        result = self.module.execute([p])
+        result = self.module.execute([p])[0]
         self.assertEqual(result.coefficients, coeff)
 
     def test_derivative_zero_polynomial(self):
@@ -68,7 +68,7 @@ class DER_P_P_test(unittest.TestCase):
         coeff = [
             Rational(Integer(Natural([0]), True), Natural([1]))  # 0
         ]
-        result = self.module.execute([p])
+        result = self.module.execute([p])[0]
         self.assertEqual(result.coefficients, coeff)
 
     if __name__ == '__main__':

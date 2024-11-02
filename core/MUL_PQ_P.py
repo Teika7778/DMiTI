@@ -25,6 +25,7 @@ class MUL_PQ_P(gm.AbstractModule):
         
         # Создаем новый многочлен с обновленными коэффициентами
         result_polynomial = Polynomial(new_coefficients)
+        result_polynomial.simplify()
         return [result_polynomial]  # Возвращаем как массив
 
     def reference(self) -> str:

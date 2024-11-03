@@ -32,7 +32,7 @@ class DIV_PP_P(gm.AbstractModule):
         pol1, pol2 = args
         # если степень числителя меньше степени знаменателя
         if self.deg.execute(pol1) < self.deg.execute(pol2):
-            return Polynomial([Rational(Integer(Natural([0])), Natural([1]))])
+            return [Polynomial([Rational(Integer(Natural([0])), Natural([1]))])]
             
         # если степень числителя больше или равна
         # находим степень k, домножив на которую делитель, получим многочлен той же степени

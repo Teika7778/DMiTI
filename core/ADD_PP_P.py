@@ -1,36 +1,27 @@
+from core import generic_module as gm
+# сложение дробей
 from core.ADD_QQ_Q import ADD_QQ_Q
+from data_types import *
 import copy
 
-
-class ADD_PP_P(gm.AbstractModule):
+class DIV_PP_P(gm.AbstractModule):
+    # добавляем функции, которыми пользуемся
     def __init__(self):
-        self.add_qq_q = ADD_QQ_Q()  # Модуль для сложения рациональных чисел
+        self.add = ADD_QQ_Q()
 
     def execute(self, args):
-        if len(args) != 2:
-            raise ValueError("Неправильное количество аргументов: функция принимает 2 аргумента")
-        if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
-            raise ValueError("Неправильный тип данных: аргументы должны быть многочленами")
+        pol1, pol2 = args
+        # максимальная длина многочленов
+        k = max(len(pol1.coefficients), len(pol2.coefficients))
+        result_coefficients = []
+        # в цикле делаем сложение коэффициентов
+        for i in range(k):
+            coef1 = pol1.coefficients[k] if len(pol1.coefficients) > k else Rational(Integer(Natural([0]), True), Natural([1]))
+            coef2 = pol2.coefficients[k] if len(pol2.coefficients) > k else Rational(Integer(Natural([0]), True), Natural([1]))
+            result_coefficients.append(self.add.execute([coef1, coef2])[0])
 
-        poly1, poly2 = copy.deepcopy(args[0]), copy.deepcopy(args[1])  # Копируем многочлены для избежания мутаций
-        result_poly = Polynomial([])  # Инициализируем результат пустым многочленом
+        # делаем результат и возвращаем полиномом
+        result_polynomial = Polynomial(result_coefficients)
+        result_polynomial.simplify()
 
-        # Определяем максимальную степень многочленов
-        max_degree = max(poly1.degree(), poly2.degree())
-
-        # Складываем коэффициенты одночленов с одинаковыми степенями
-        for degree in range(max_degree + 1):
-            term1 = poly1.coefficient(degree) if poly1.degree() >= degree else Rational(0, 1)
-            term2 = poly2.coefficient(degree) if poly2.degree() >= degree else Rational(0, 1)
-
-            # Используем ADD_QQ_Q для сложения коэффициентов
-            sum_of_terms = self.add_qq_q.execute([term1, term2])[0]
-
-            # Добавляем результат к многочлену, если коэффициент не равен нулю
-            if sum_of_terms.numerator != 0:
-                result_poly.add_term(sum_of_terms, degree)
-
-        return result_poly
-
-    def reference(self) -> str:
-        return "Модуль для сложения многочленов"
+        return [result_polynomial]

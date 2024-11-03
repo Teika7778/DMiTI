@@ -28,15 +28,14 @@ class ADD_QQ_Q(gm.AbstractModule):
         lcm_denom = self.lcm_nn_n.execute([rational_1.denominator, rational_2.denominator])[0]
 
         # 2. НОК делим на каждый знаменатель, получаем множители
-        factor1 = self.div_nn_n.execute([lcm_denom, rational_1.denominator])[0]  # i1
-        factor2 = self.div_nn_n.execute([lcm_denom, rational_2.denominator])[0]  # i2
+        denom_mult_1 = self.trans_n_z.execute([self.div_nn_n.execute([lcm_denom, rational_1.denominator])[0]])[0]
+        denom_mult_2 = self.trans_n_z.execute([self.div_nn_n.execute([lcm_denom, rational_2.denominator])[0]])[0]
 
         # 3. Умножаем числители на соответствующие множители
         # Преобразуем НОК в целое число
-        lcm_denom_as_integer = self.trans_n_z.execute([lcm_denom])[0]
 
-        num1_mult = self.mul_zz_z.execute([rational_1.numerator, lcm_denom_as_integer])[0]  # Числитель 1
-        num2_mult = self.mul_zz_z.execute([rational_2.numerator, lcm_denom_as_integer])[0]  # Числитель 2
+        num1_mult = self.mul_zz_z.execute([rational_1.numerator, denom_mult_1])[0]  # Числитель 1
+        num2_mult = self.mul_zz_z.execute([rational_2.numerator, denom_mult_2])[0]  # Числитель 2
 
         # 4. Складываем приведённые числители
         numerator_sum = self.add_zz_z.execute([num1_mult, num2_mult])[0]
@@ -46,3 +45,4 @@ class ADD_QQ_Q(gm.AbstractModule):
 
     def reference(self) -> str:
         return "Модуль для сложения рациональных чисел"
+

@@ -20,14 +20,17 @@ class NMR_P_P(gm.AbstractModule):
             raise ValueError("Function NMR_P_P takes only 1 arg.")
         if not (isinstance(args[0], Polynomial)):
             raise ValueError("Invalid data type in NMR_P_P: must be Polynomial.")
-        
+
         pol = args[0]
         # находим производную
-        der_pol = self.der.execute(args)
+        der_pol = self.der.execute(args)[0]
         # НОД многочлена и производной
-        gcf_pol_der_pol = self.gcf.execute([pol, der_pol])
+        gcf_pol_der_pol = self.gcf.execute([pol, der_pol])[0]
         # делим и получаем нужный многочлен
-        result_polynomial = self.div.execute([pol, gcf_pol_der_pol])
+        result_polynomial = self.div.execute([pol, gcf_pol_der_pol])[0]
         result_polynomial.simplify()
 
         return [result_polynomial]
+
+    def reference(self) -> str:
+        pass

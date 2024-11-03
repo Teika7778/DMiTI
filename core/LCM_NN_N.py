@@ -20,9 +20,7 @@ class LCM_NN_N(gm.AbstractModule):
             raise ValueError("Invalid data type: must be natural")
 
         mul_args = self.mul_nn.execute([args[0], args[1]])[0]  # Произведение переданных натуральных чисел
-        print(mul_args.numbers)
         gcf_args = self.gcf_nn.execute([args[0], args[1]])[0]  # НОД переданных натуральных чисел
-        print(gcf_args.numbers)
         return self.div_nn.execute([mul_args, gcf_args])  # Подсчет НОК
 
     def reference(self) -> str:

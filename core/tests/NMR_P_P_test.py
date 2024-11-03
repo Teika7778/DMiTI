@@ -19,7 +19,8 @@ class NMR_P_P_test(unittest.TestCase):
             Rational(Integer(Natural([1]), True), Natural([3]))  # 1/3
         ]
         result = self.module.execute([p])[0]    # 1/3x-3
-        self.assertEqual(result.coefficients, coeff)
+        self.assertEqual([str(coef) for coef in result.coefficients],
+                         [str(coef) for coef in coeff])
 
     def test_derivative_linear(self):
         coef = [
@@ -32,7 +33,8 @@ class NMR_P_P_test(unittest.TestCase):
             Rational(Integer(Natural([1]), False), Natural([8, 8, 9]))  # -1/988
         ]
         result = self.module.execute([p])[0]  # -1/988x+9
-        self.assertEqual(result.coefficients, coeff)
+        self.assertEqual([str(coef) for coef in result.coefficients],
+                         [str(coef) for coef in coeff])
 
     def test_division_with_zero(self):
         coef = [
@@ -43,7 +45,8 @@ class NMR_P_P_test(unittest.TestCase):
             Rational(Integer(Natural([9]), True), Natural([1, 2]))  # 9/21
         ]
         result = self.module.execute([p])[0]  # 9/21
-        self.assertEqual(result.coefficients, coeff)
+        self.assertEqual([str(coef) for coef in result.coefficients],
+                         [str(coef) for coef in coeff])
 
     if __name__ == '__main__':
         unittest.main()

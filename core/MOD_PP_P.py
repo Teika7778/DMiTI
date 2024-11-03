@@ -20,11 +20,14 @@ class MOD_PP_P(gm.AbstractModule):
             raise ValueError("Function MOD_PP_P takes only 2 args.")
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
             raise ValueError("Invalid data type in MOD_PP_P: must be Polynomial.")
-        
+
         # находим частное, умножаем на делитель и отнимаем полученный полином от делимого
-        div_pol = self.div.execute(args)
-        mul_for_sub_pol = self.mul.execute([args[1], div_pol])
-        result_polynomial = self.sub.execute([args[0], mul_for_sub_pol])
+        div_pol = self.div.execute(args)[0]
+        mul_for_sub_pol = self.mul.execute([args[1], div_pol])[0]
+        result_polynomial = self.sub.execute([args[0], mul_for_sub_pol])[0]
         result_polynomial.simplify()
 
         return [result_polynomial]
+
+    def reference(self) -> str:
+        pass

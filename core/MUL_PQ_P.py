@@ -1,8 +1,6 @@
-
 from core import generic_module as gm
 from data_types import *
 from core.MUL_QQ_Q import MUL_QQ_Q
-import copy
 
 class MUL_PQ_P(gm.AbstractModule):
     def __init__(self):

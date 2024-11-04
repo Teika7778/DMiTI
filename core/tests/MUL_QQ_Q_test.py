@@ -3,7 +3,7 @@ from data_types import *
 from core.MUL_QQ_Q import MUL_QQ_Q
 
 
-class Mul_QQ_Q(unittest.TestCase):
+class Mul_QQ_Q_test(unittest.TestCase):
     def setUp(self):
         self.mul_module = MUL_QQ_Q()
 
@@ -38,7 +38,7 @@ class Mul_QQ_Q(unittest.TestCase):
         second_denominator = Natural([1]) # 1
         second_rational = Rational(second_numerator, second_denominator) #0
         result = self.mul_module.execute([first_rational, second_rational]) # 0
-        self.assertEqual([str(result[0].numerator), str(result[0].denominator)], [str(Integer(Natural([0]), True)), str(Natural([7]))]) # ??
+        self.assertEqual([str(result[0].numerator), str(result[0].denominator)], [str(Integer(Natural([0]))), str(Natural([7]))]) # 0
 
     def test_million_multiplication(self):
         # 1000000/1627 * 3/4

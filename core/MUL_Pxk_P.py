@@ -12,8 +12,7 @@ class MUL_Pxk_P(gm.AbstractModule):
         counter = 0 # Счётчик, считает на сколько нужно увеличить степень многочлена
         for i in range(0, len(args[1].numbers)):
             counter += (10**i)*args[1].numbers[i]
-        for i in range(counter):
-            result.coefficients = [Rational(Integer(Natural([0])), Natural([1]))] + result.coefficients # Заполняем нулями для увеличения степени
+        result.coefficients = [Rational(Integer(Natural([0])), Natural([1]))]*counter + result.coefficients # Заполняем нулями для увеличения степени
         return [result]
 
     def reference(self) ->str:

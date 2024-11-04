@@ -25,7 +25,10 @@ class GCF_PP_P_test(unittest.TestCase):
         second_polym = Polynomial([zero_coef_2, first_coef_2, second_coef_2, third_coef_2, forth_coef_2, fifth_coef_2]) # 1-x+x^2+x^5
         result = self.gcf_module.execute([first_polym, second_polym])[0]
         #1-x+x^3
-        correct_answer = Polynomial(Rational(Integer(Natural([1])), Natural([1])), Rational(Integer(Natural([1]), True), Natural([1])), Rational(Integer(Natural([0])), Natural([1])), Rational(Integer(Natural([1])), Natural([1])))
+        correct_answer = Polynomial([Rational(Integer(Natural([1])), Natural([1])), 
+                                     Rational(Integer(Natural([1])), Natural([1])), 
+                                     Rational(Integer(Natural([0])), Natural([1])), 
+                                     Rational(Integer(Natural([1])), Natural([1]))])
         self.assertEqual([str(elem) for elem in result.coefficients], [str(elem) for elem in correct_answer.coefficients])
 
     def test_GCF(self):
@@ -42,6 +45,7 @@ class GCF_PP_P_test(unittest.TestCase):
         second_polym = Polynomial([zero_coef_2, first_coef_2, second_coef_2, third_coef_2]) #-1-x+x^2+x^3
         result = self.gcf_module.execute([first_polym, second_polym])[0]
         #-x-1
-        correct_answer = Polynomial(Rational(Integer(Natural([1]), True), Natural([1])), Rational(Integer(Natural([1]), True), Natural([1])) )
+        correct_answer = Polynomial([Rational(Integer(Natural([1])), Natural([1])), 
+                                     Rational(Integer(Natural([1]), True), Natural([1]))])
         self.assertEqual([str(elem) for elem in result.coefficients], [str(elem) for elem in correct_answer.coefficients])
 

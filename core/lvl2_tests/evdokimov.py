@@ -2,7 +2,6 @@ import unittest
 from core.ADD_1N_N import ADD_1N_N
 from core.ADD_NN_N import ADD_NN_N
 from core.COM_NN_D import COM_NN_D
-from core.DIV_NN_Dk import DIV_NN_Dk
 from core.DIV_NN_N import DIV_NN_N
 from core.LCM_NN_N import LCM_NN_N
 from core.GCF_NN_N import GCF_NN_N
@@ -21,11 +20,11 @@ class MyTestCase(unittest.TestCase):
         self.add_1n = ADD_1N_N()   # +
         self.add_nn = ADD_NN_N()   # +
         self.com_nn = COM_NN_D()   # +
-        self.div_nn = DIV_NN_N()   #
-        self.lcm_nn = LCM_NN_N()   #
-        self.gcf_nn = GCF_NN_N()   #
-        self.mod_nn = MOD_NN_N()   #
-        self.mul_nn = MUL_NN_N()   #
+        self.div_nn = DIV_NN_N()   # +
+        self.lcm_nn = LCM_NN_N()   # +
+        self.gcf_nn = GCF_NN_N()   # +
+        self.mod_nn = MOD_NN_N()   # +
+        self.mul_nn = MUL_NN_N()   # +
         self.sub_nn = SUB_NN_N()   # +
 
         self.n1 = Natural([0]*100 + [1] * 100)
@@ -33,8 +32,10 @@ class MyTestCase(unittest.TestCase):
         self.n2_c = Natural([9]*1000)
         self.n3 = Natural([1]*100)
         self.zero = Natural([0])
+        self.prime1 = Natural([1, 9, 5, 4])
+        self.prime2 = Natural([1, 8, 1, 3])
 
-    def testNaturalAndPoly(self):
+    def testNaturalsBigNumbers(self):
         #СЛОЖЕНИЕ, ВЫЧИТАНИЕ, СРАВНЕНИЕ
         res1 = self.add_nn.execute([self.n2, self.n3])[0]
         self.assertEqual(getInt(res1), getInt(self.n2) + getInt(self.n3))
@@ -68,6 +69,45 @@ class MyTestCase(unittest.TestCase):
         res13 = self.div_nn.execute([res1, self.n1])[0]
         res14 = self.mod_nn.execute([res1, self.n1])[0]
         self.assertEqual(getInt(res13), getInt(res1) // getInt(self.n1))
+        self.assertEqual(getInt(res14), getInt(res1) % getInt(self.n1))
+        res15 = self.mul_nn.execute([res13, self.n1])[0]
+        self.assertEqual(getInt(res15), getInt(res13) * getInt(self.n1))
+        res16 = self.add_nn.execute([res15, res14])[0]
+        self.assertEqual(getInt(res16), getInt(res1))
+        res17 = self.mul_nn.execute([res13, res14])[0]
+        self.assertEqual(getInt(res17), getInt(res13) * getInt(res14))
+
+        #ТЕОРИЯ ЧИСЕЛ
+        res18 = self.mul_nn.execute([self.prime1, res17])[0]
+        res19 = self.mul_nn.execute([self.prime2, res17])[0]
+        self.assertEqual(getInt(res18), getInt(self.prime1) * getInt(res17))
+        self.assertEqual(getInt(res19), getInt(self.prime2) * getInt(res17))
+        res20 = self.gcf_nn.execute([res18, res19])[0]
+        self.assertEqual(getInt(res20), getInt(res17))
+        res21 = self.gcf_nn.execute([self.prime1, self.prime2])[0]
+        self.assertEqual(getInt(res21), 1)
+        res22 = self.mul_nn.execute([self.prime1, self.prime2])[0]
+        self.assertEqual(getInt(res22), getInt(self.prime1) * getInt(self.prime2))
+        res23 = self.lcm_nn.execute([self.prime1, self.prime2])[0]
+        self.assertEqual(getInt(res22), getInt(res23))
+        res24 = self.mul_nn.execute([res22, res17])[0]
+        self.assertEqual(getInt(res24), getInt(res22) * getInt(res17))
+        # res25 = self.lcm_nn.execute([res18, res19])[0]
+        # self.assertEqual(getInt(res25), getInt(res24))
+        # долгий тест, но рабочий
+
+        self.assertEqual(getInt(res1), getInt(self.n2) + getInt(self.n3))
+        self.assertEqual(getInt(res2), getInt(res1) + getInt(self.n1))
+        self.assertEqual(getInt(res3), getInt(res2))
+        self.assertEqual(getInt(res4), getInt(res1) + 1)
+        self.assertEqual(getInt(self.n2), getInt(self.n2_c))
+        self.assertEqual(getInt(res1), getInt(self.n2) + getInt(self.n3))
+        self.assertEqual(getInt(res1) - getInt(self.n3), getInt(self.n2))
+        self.assertEqual(getInt(res12), getInt(res1) - getInt(self.n3))
+        self.assertEqual(getInt(res13), getInt(res1) // getInt(self.n1))
+        self.assertEqual(getInt(res14), getInt(res1) % getInt(self.n1))
+
+
 
 if __name__ == '__main__':
     unittest.main()

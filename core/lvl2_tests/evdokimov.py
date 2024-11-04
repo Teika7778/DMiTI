@@ -21,7 +21,6 @@ class MyTestCase(unittest.TestCase):
         self.add_1n = ADD_1N_N()   # +
         self.add_nn = ADD_NN_N()   # +
         self.com_nn = COM_NN_D()   # +
-        self.div_nn_d = DIV_NN_Dk()#
         self.div_nn = DIV_NN_N()   #
         self.lcm_nn = LCM_NN_N()   #
         self.gcf_nn = GCF_NN_N()   #
@@ -65,6 +64,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(getInt(res1) - getInt(self.n3), getInt(self.n2))
         self.assertEqual(getInt(res12), getInt(res1) - getInt(self.n3))
 
+        #УМНОЖЕНИЯ И ДЕЛЕНИЯ
+        res13 = self.div_nn.execute([res1, self.n1])[0]
+        res14 = self.mod_nn.execute([res1, self.n1])[0]
+        self.assertEqual(getInt(res13), getInt(res1) // getInt(self.n1))
 
 if __name__ == '__main__':
     unittest.main()

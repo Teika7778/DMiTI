@@ -66,5 +66,5 @@ class DIV_PP_P_test(unittest.TestCase):
         self.assertEqual([str(coef) for coef in result.coefficients],
                          [str(coef) for coef in coeff])
 
-if __name__ == '__main__':
-    unittest.main()
+    if __name__ == '__main__':
+        unittest.main()

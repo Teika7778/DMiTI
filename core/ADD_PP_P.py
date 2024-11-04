@@ -4,7 +4,8 @@ from core.ADD_QQ_Q import ADD_QQ_Q
 from data_types import *
 import copy
 
-class DIV_PP_P(gm.AbstractModule):
+
+class ADD_PP_P(gm.AbstractModule):
     # добавляем функции, которыми пользуемся
     def __init__(self):
         self.add = ADD_QQ_Q()
@@ -16,8 +17,8 @@ class DIV_PP_P(gm.AbstractModule):
         result_coefficients = []
         # в цикле делаем сложение коэффициентов
         for i in range(k):
-            coef1 = pol1.coefficients[k] if len(pol1.coefficients) > k else Rational(Integer(Natural([0]), True), Natural([1]))
-            coef2 = pol2.coefficients[k] if len(pol2.coefficients) > k else Rational(Integer(Natural([0]), True), Natural([1]))
+            coef1 = pol1.coefficients[i] if i < len(pol1.coefficients) else Rational(Integer(Natural([0]), True), Natural([1]))
+            coef2 = pol2.coefficients[i] if i < len(pol2.coefficients) else Rational(Integer(Natural([0]), True), Natural([1]))
             result_coefficients.append(self.add.execute([coef1, coef2])[0])
 
         # делаем результат и возвращаем полиномом
@@ -25,3 +26,6 @@ class DIV_PP_P(gm.AbstractModule):
         result_polynomial.simplify()
 
         return [result_polynomial]
+
+    def reference(self) -> str:
+        pass

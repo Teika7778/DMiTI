@@ -1,5 +1,5 @@
 import unittest
-from data_types import Rational, Natural
+from data_types import *
 from core.ADD_QQ_Q import ADD_QQ_Q  # Импортируем класс ADD_QQ_Q
 
 class TestADDQQQ(unittest.TestCase):
@@ -14,8 +14,8 @@ class TestADDQQQ(unittest.TestCase):
         result = self.add_qq_q.execute([r1, r2])[0]
         num = Integer(Natural([5]), True)
         den = Natural([6])
-        self.assertEqual(result.numerator, num)  # 5 (числитель)
-        self.assertEqual(result.denominator, den)  # 6 (знаменатель), т.к. 1/2 + 1/3 = 5/6
+        self.assertEqual(str(result.numerator), str(num))  # 5 (числитель)
+        self.assertEqual(str(result.denominator), str(den))  # 6 (знаменатель), т.к. 1/2 + 1/3 = 5/6
 
     def test_add_negative_rationals(self):
         # Тест сложения отрицательных дробей
@@ -24,8 +24,8 @@ class TestADDQQQ(unittest.TestCase):
         result = self.add_qq_q.execute([r1, r2])[0]
         num = Integer(Natural([5]), False)
         den = Natural([6])
-        self.assertEqual(result.numerator, num)  # -5 (числитель)
-        self.assertEqual(result.denominator, den)  # 6 (знаменатель), т.к. -1/2 + -1/3 = -5/6
+        self.assertEqual(str(result.numerator), str(num))  # -5 (числитель)
+        self.assertEqual(str(result.denominator), str(den))  # 6 (знаменатель), т.к. -1/2 + -1/3 = -5/6
 
     def test_add_mixed_rationals(self):
         # Тест сложения смешанных дробей
@@ -34,8 +34,8 @@ class TestADDQQQ(unittest.TestCase):
         result = self.add_qq_q.execute([r1, r2])[0]
         num = Integer(Natural([7]), True)
         den = Natural([6])
-        self.assertEqual(result.numerator, num)  # 7 (числитель)
-        self.assertEqual(result.denominator, den)  # 6 (знаменатель), т.к. 1/2 + 2/3 = 7/6
+        self.assertEqual(str(result.numerator), str(num))  # 7 (числитель)
+        self.assertEqual(str(result.denominator), str(den))  # 6 (знаменатель), т.к. 1/2 + 2/3 = 7/6
 
     def test_add_zero_rational(self):
         # Тест сложения дроби с нулем
@@ -44,8 +44,8 @@ class TestADDQQQ(unittest.TestCase):
         result = self.add_qq_q.execute([r1, r2])[0]
         num = Integer(Natural([1]), True)
         den = Natural([2])
-        self.assertEqual(result.numerator, num)  # 1 (числитель)
-        self.assertEqual(result.denominator, den)  # 2 (знаменатель)
+        self.assertEqual(str(result.numerator), str(num))  # 1 (числитель)
+        self.assertEqual(str(result.denominator), str(den))  # 2 (знаменатель)
 
 if __name__ == '__main__':
     unittest.main()

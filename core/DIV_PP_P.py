@@ -31,28 +31,32 @@ class DIV_PP_P(gm.AbstractModule):
         
         pol1, pol2 = args
         # если степень числителя меньше степени знаменателя
-        if self.deg.execute(pol1) < self.deg.execute(pol2):
-            return Polynomial([Rational(Integer(Natural([0])), Natural([1]))])
+        if self.deg.execute([pol1]) < self.deg.execute([pol2]):
+            return [Polynomial([Rational(Integer(Natural([0])), Natural([1]))])]
             
         # если степень числителя больше или равна
         # находим степень k, домножив на которую делитель, получим многочлен той же степени
         k = len(pol1.coefficients) - len(pol2.coefficients)
         result_coefficients = []
-        
+
         # в цикле делаем как бы деление столбиком 0<=i<=k
         for i in range(k, -1, -1):
             # домножив, получаем нужную степень
-            pol_for_mul = self.mul_xk.execute([pol2, Natural([i])])
+            pol_for_mul = self.mul_xk.execute([pol2, Natural([i])])[0]
             # делением старших коэффициентов находим нужный коэффициент частного
-            q_for_mul = self.div.execute([pol1[-1], pol_for_mul[-1]])
+            q_for_mul = self.div.execute([pol1.coefficients[-1], pol_for_mul.coefficients[-1]])[0]
             # вставляем коэффициент в начало
             result_coefficients = [q_for_mul] + result_coefficients
             # умножаем делитель нужной степени на коэффициент
-            pol_for_sub = self.mul.execute([pol_for_mul, q_for_mul])
+            pol_for_sub = self.mul.execute([pol_for_mul, q_for_mul])[0]
             # отнимаем от исходного полученный многочлен
-            result_pol = self.sub.execute([pol1, pol_for_sub])
-            # убираем лишний ноль
-            pol1 = result_pol.simplify()
+            result_pol = self.sub.execute([pol1, pol_for_sub])[0]
+            # если simplify в вычитании поудалял нули, они всё равно нужны в частном
+            if len(result_pol.coefficients) < len(pol2.coefficients):
+                for j in range(len(pol1.coefficients) - len(pol2.coefficients)):
+                    result_coefficients = [Rational(Integer(Natural([0])), Natural([1]))] + result_coefficients
+                break
+            pol1 = result_pol
             # переходим к следующему, продолжая деление столбиком
 
         # делаем результат и возвращаем полиномом
@@ -60,3 +64,6 @@ class DIV_PP_P(gm.AbstractModule):
         result_polynomial.simplify()
 
         return [result_polynomial]
+
+    def reference(self) -> str:
+        pass

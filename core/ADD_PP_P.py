@@ -4,7 +4,6 @@ from core.ADD_QQ_Q import ADD_QQ_Q
 from data_types import *
 import copy
 
-
 class ADD_PP_P(gm.AbstractModule):
     # добавляем функции, которыми пользуемся
     def __init__(self):

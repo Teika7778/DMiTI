@@ -4,7 +4,7 @@ from data_types import *
 
 class SUB_PP_P(gm.AbstractModule):
     # добавляем функцию, которой пользуемся
-    def init(self):
+    def __init__(self):
         self.sub_q = SUB_QQ_Q()
 
     def execute(self, args):
@@ -26,7 +26,7 @@ class SUB_PP_P(gm.AbstractModule):
             coef2 = p2.coefficients[i] if i < len(p2.coefficients) else Rational(Integer(Natural([0]), True), Natural([1]))
 
             # вычитание коэффициентов
-            result_coef = self.sub_q.execute([coef1, coef2])
+            result_coef = self.sub_q.execute([coef1, coef2])[0]
             result_coefficients.append(result_coef)
 
         # делаем результат и возвращаем полиномом
@@ -34,3 +34,6 @@ class SUB_PP_P(gm.AbstractModule):
         result_polynomial.simplify()
 
         return [result_polynomial]
+
+    def reference(self) -> str:
+        pass

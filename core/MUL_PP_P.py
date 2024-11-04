@@ -19,7 +19,8 @@ class MUL_PP_P(gm.AbstractModule):
         result = Polynomial([Rational(Integer(Natural([0])), Natural([1]))]) # Нулевой многочлен
         for degree in range(len(args[1].coefficients)): # Цикл по элементам второго многочлен
             temp_result = self.mul_pq_p.execute([args[0], args[1].coefficients[degree]])[0]  # промежуточный результат - результат умножения
-            temp_result = self.mul_pxk_p.execute([temp_result, Natural([degree])])[0] # всего P(x) на i-ый коэф Q(x) и умноженный на x^i
+            degree_num = list(map(int, list(str(degree))[::-1]))
+            temp_result = self.mul_pxk_p.execute([temp_result, Natural(degree_num)])[0] # всего P(x) на i-ый коэф Q(x) и умноженный на x^i
             result = self.add_pp_p.execute([result, temp_result])[0] # Ответ - сумма таких промежуточных результатов
         return [result]
 

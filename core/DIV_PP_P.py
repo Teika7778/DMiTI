@@ -8,6 +8,8 @@ from core.MUL_Pxk_P import MUL_Pxk_P
 # умножение многочлена на дробь
 from core.MUL_PQ_P import MUL_PQ_P
 # вычитание многочленов
+from core.MUL_PP_P import MUL_PP_P
+
 from core.SUB_PP_P import SUB_PP_P
 # сложение многочленов хоть и есть в зависимостях, не используется
 from data_types import *
@@ -16,6 +18,7 @@ import copy
 class DIV_PP_P(gm.AbstractModule):
     # добавляем функции, которыми пользуемся
     def __init__(self):
+        self.mul_pp = MUL_PP_P()
         self.div = DIV_QQ_Q()
         self.deg = DEG_P_N()
         self.mul_xk = MUL_Pxk_P()
@@ -52,9 +55,9 @@ class DIV_PP_P(gm.AbstractModule):
             # отнимаем от исходного полученный многочлен
             result_pol = self.sub.execute([pol1, pol_for_sub])[0]
             # если simplify в вычитании поудалял нули, они всё равно нужны в частном
+            while len(self.mul_pp.execute([Polynomial(result_coefficients), pol2])[0].coefficients) < len(pol1.coefficients):
+                result_coefficients = [Rational(Integer(Natural([0])), Natural([1]))] + result_coefficients
             if len(result_pol.coefficients) < len(pol2.coefficients):
-                for j in range(len(pol1.coefficients) - len(pol2.coefficients)):
-                    result_coefficients = [Rational(Integer(Natural([0])), Natural([1]))] + result_coefficients
                 break
             pol1 = result_pol
             # переходим к следующему, продолжая деление столбиком

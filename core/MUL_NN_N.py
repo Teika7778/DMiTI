@@ -25,7 +25,8 @@ class MUL_NN_N(gm.AbstractModule):
         # Перемножение "столбиком" каждой цифры множителя на каждую цифру множимого
         for i in range(len(multiplier.numbers)):
             product = self.mul_nd.execute([multiplicand, Natural([multiplier.numbers[i]])])[0]  # Произведение множимого на i-тую цифру множителя
-            product = self.mul_nk.execute([product, Natural([i])])[0]
+            product_nums = list(map(int, list(str(i))[::-1]))
+            product = self.mul_nk.execute([product, Natural(product_nums)])[0]
             result = self.add_nn.execute([result, product])[0]
 
         result.simplify()

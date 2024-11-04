@@ -25,7 +25,9 @@ class MUL_ZZ_Z(gm.AbstractModule):
             return self.mul_zm_z.execute([args[0]])
 
         is_positive = False if self.poz.execute([args[0]])[0].numbers != self.poz.execute([args[1]])[0].numbers else True # Если знаки не совпадают = "-"
-        result = Integer(self.mul_nn_n.execute([args[0].natural, args[1].natural])[0], is_positive=is_positive)
+        abs_result = self.mul_nn_n.execute([args[0].natural, args[1].natural])[0]
+        if abs_result.numbers == [0]: is_positive = True
+        result = Integer(abs_result, is_positive=is_positive)
 
         return [result]
 

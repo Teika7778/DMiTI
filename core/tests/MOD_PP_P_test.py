@@ -12,14 +12,14 @@ class MOD_PP_P_test(unittest.TestCase):
             Rational(Integer(Natural([3]), True), Natural([1])),  # 3
             Rational(Integer(Natural([2]), True), Natural([1, 1]))  # 2/11
         ]
-        p1 = Polynomial(coef1)   # 2/11x + 1
+        p1 = Polynomial(coef1)   # 2/11x + 3
         coef2 = [
             Rational(Integer(Natural([1]), True), Natural([1])),  # 1
             Rational(Integer(Natural([2]), True), Natural([1, 1]))  # 2/11
         ]
-        p2 = Polynomial(coef1)  # 2/11x + 1
+        p2 = Polynomial(coef2)  # 2/11x + 1
         coeff = [
-            Rational(Integer(Natural([2]), True), Natural([1]))  # 2
+            Rational(Integer(Natural([4, 4]), True), Natural([2, 2]))  # 2
         ]
         result = self.module.execute([p1, p2])[0]
         self.assertEqual([str(coef) for coef in result.coefficients],

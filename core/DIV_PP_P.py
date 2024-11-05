@@ -32,9 +32,9 @@ class DIV_PP_P(gm.AbstractModule):
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
             raise ValueError("Invalid data type in DIV_PP_P: must be Polynomial.")
         
-        pol1, pol2 = args
+        pol1, pol2 = copy.deepcopy(args[0]), copy.deepcopy(args[1])
         # если степень числителя меньше степени знаменателя
-        if self.deg.execute([pol1]) < self.deg.execute([pol2]):
+        if len(pol1.coefficients) < len(pol2.coefficients):
             return [Polynomial([Rational(Integer(Natural([0])), Natural([1]))])]
             
         # если степень числителя больше или равна
@@ -44,8 +44,9 @@ class DIV_PP_P(gm.AbstractModule):
 
         # в цикле делаем как бы деление столбиком 0<=i<=k
         for i in range(k, -1, -1):
+            i_digits = list(map(int, str(i)[::-1]))
             # домножив, получаем нужную степень
-            pol_for_mul = self.mul_xk.execute([pol2, Natural([i])])[0]
+            pol_for_mul = self.mul_xk.execute([pol2, Natural(i_digits)])[0]
             # делением старших коэффициентов находим нужный коэффициент частного
             q_for_mul = self.div.execute([pol1.coefficients[-1], pol_for_mul.coefficients[-1]])[0]
             # вставляем коэффициент в начало

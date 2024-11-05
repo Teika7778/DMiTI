@@ -19,7 +19,7 @@ class DEG_P_N(gm.AbstractModule):
         # Определение степени как длина массива коэффициентов - 1
         degree = len(polynomial.coefficients) - 1
         degree = list(map(int, list(str(degree))[::-1]))
-        return Natural(degree)  # Возвращаем массив с единственным элементом — степенью многочлена
+        return [Natural(degree)]  # Возвращаем массив с единственным элементом — степенью многочлена
     
     def reference(self) -> str:
         return "DEG_P_N - Determines the degree of a polynomial."

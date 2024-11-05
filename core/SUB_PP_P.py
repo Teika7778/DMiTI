@@ -1,5 +1,6 @@
 from core import generic_module as gm
 from core.SUB_QQ_Q import SUB_QQ_Q
+import copy
 from data_types import *
 
 class SUB_PP_P(gm.AbstractModule):
@@ -15,8 +16,8 @@ class SUB_PP_P(gm.AbstractModule):
             raise ValueError("Invalid data type in SUB_PP_P: must be Polynomial.")
         
         # сравниваем длины полиномов, чтобы взять большую для вычитания
-        p1 = args[0]
-        p2 = args[1]
+        p1 = copy.deepcopy(args[0])
+        p2 = copy.deepcopy(args[1])
         max_len = max(len(p1.coefficients), len(p2.coefficients))
         result_coefficients = []
 

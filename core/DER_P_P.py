@@ -21,7 +21,8 @@ class DER_P_P(gm.AbstractModule):
         # считаем производную, пропуская первый член при x^0
         for i in range(1, len(p.coefficients), 1):
             # стряпаем рациональное число из соответствующей степени
-            q_i = Rational(Integer(Natural([i]), True), Natural([1]))
+            i_list = list(map(int, list(str(i))[::-1]))
+            q_i = Rational(Integer(Natural(i_list), True), Natural([1]))
             # умножаем степень на коэффициент и по сути сдвигаем на степень ниже из-за пропуска
             result_coefficients.append(self.module.execute([q_i, p.coefficients[i]])[0])
 

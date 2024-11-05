@@ -45,6 +45,22 @@ class DIV_PP_P_test(unittest.TestCase):
         self.assertEqual([str(coef) for coef in result.coefficients],
                          [str(coef) for coef in coeff])
 
+    def test_long_poli(self):
+        coef1 = (([Rational(Integer(Natural([3])), Natural([1]))] * 20
+                 + [Rational(Integer(Natural([0])), Natural([1]))])
+                 + [Rational(Integer(Natural([1])), Natural([1]))])
+        p1 = Polynomial(coef1)
+
+        coef2 = [
+            Rational(Integer(Natural([2])), Natural([1])),  # 2
+            Rational(Integer(Natural([1])), Natural([1]))  # 1
+        ]
+        p2 = Polynomial(coef2)
+
+        result = self.module.execute([p1, p2])[0]
+        self.assertNotEqual([str(coef) for coef in result.coefficients],
+                         [str(coef) for coef in coef1])
+
     def test_division_with_zero(self):
         coef1 = [
             Rational(Integer(Natural([2])), Natural([1])),  # 2
@@ -68,3 +84,4 @@ class DIV_PP_P_test(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+    

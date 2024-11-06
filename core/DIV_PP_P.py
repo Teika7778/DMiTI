@@ -58,7 +58,7 @@ class DIV_PP_P(gm.AbstractModule):
             if ((len(dividend.coefficients) - len(new_dividend.coefficients)) >= 2 and  list(map(str, new_dividend.coefficients)) != ['0']):
                 for _ in range(len(dividend.coefficients) - len(new_dividend.coefficients) -1):
                     result_coefficients = [Rational(Integer(Natural([0])), Natural([1]))] + result_coefficients
-            #делим полином, полученный в результате вычитания
+            #Делим полином, полученный в результате вычитания
             dividend = new_dividend
             
         return [Polynomial(result_coefficients)]

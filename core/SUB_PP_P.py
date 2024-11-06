@@ -1,10 +1,11 @@
 from core import generic_module as gm
 from core.SUB_QQ_Q import SUB_QQ_Q
+import copy
 from data_types import *
 
 class SUB_PP_P(gm.AbstractModule):
     # добавляем функцию, которой пользуемся
-    def init(self):
+    def __init__(self):
         self.sub_q = SUB_QQ_Q()
 
     def execute(self, args):
@@ -15,8 +16,8 @@ class SUB_PP_P(gm.AbstractModule):
             raise ValueError("Invalid data type in SUB_PP_P: must be Polynomial.")
         
         # сравниваем длины полиномов, чтобы взять большую для вычитания
-        p1 = args[0]
-        p2 = args[1]
+        p1 = copy.deepcopy(args[0])
+        p2 = copy.deepcopy(args[1])
         max_len = max(len(p1.coefficients), len(p2.coefficients))
         result_coefficients = []
 
@@ -26,7 +27,7 @@ class SUB_PP_P(gm.AbstractModule):
             coef2 = p2.coefficients[i] if i < len(p2.coefficients) else Rational(Integer(Natural([0]), True), Natural([1]))
 
             # вычитание коэффициентов
-            result_coef = self.sub_q.execute([coef1, coef2])
+            result_coef = self.sub_q.execute([coef1, coef2])[0]
             result_coefficients.append(result_coef)
 
         # делаем результат и возвращаем полиномом
@@ -34,3 +35,6 @@ class SUB_PP_P(gm.AbstractModule):
         result_polynomial.simplify()
 
         return [result_polynomial]
+
+    def reference(self) -> str:
+        pass

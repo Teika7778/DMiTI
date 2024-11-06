@@ -47,7 +47,7 @@ class LCM_NN_N_test(unittest.TestCase):
         n1 = Natural([9, 8, 7, 6, 5, 4, 3, 2, 1])  # 123456789
         n2 = Natural([1, 2, 3, 4, 5, 6, 7, 8, 9])  # 987654321
         result = self.modul.execute([n1, n2])[0]
-        expect = [1, 4, 1, 6, 2, 3, 6, 2, 0, 7, 8, 4, 5, 3, 1]
+        expect = [1, 4, 1, 6, 2, 6, 3, 2, 1, 0, 7, 0, 8, 4, 5, 3, 1]
         self.assertEqual(result.numbers, expect)
 
     def test_lcm_any_numbers(self):

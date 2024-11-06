@@ -29,7 +29,8 @@ class SUB_PP_P_test(unittest.TestCase):
         ]
         expected_result = Polynomial(expected_coef)     # 310
         result = self.module.execute([P1, P2])[0]
-        self.assertEqual(result.str(), expected_result.str())
+        self.assertEqual([str(coef) for coef in result.coefficients],
+                         [str(coef) for coef in expected_coef])
 
     def test_subtract_polynomials_with_zero_result(self):
         coef3 = [
@@ -50,8 +51,9 @@ class SUB_PP_P_test(unittest.TestCase):
             Rational(Integer(Natural([0]), True), Natural([1]))  #0
         ]
         expected_zero_poly = Polynomial(coeff)  # 0
-        result = self.sub_pp.execute([P3, P4])[0]
-        self.assertEqual(result.str(), expected_zero_poly.str())
+        result = self.module.execute([P3, P4])[0]
+        self.assertEqual([str(coef) for coef in result.coefficients],
+                         [str(coef) for coef in coeff])
 
-    if __name__ == "__main__":
-        unittest.main()
+if __name__ == "__main__":
+    unittest.main()

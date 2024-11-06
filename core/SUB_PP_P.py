@@ -38,3 +38,25 @@ class SUB_PP_P(gm.AbstractModule):
 
     def reference(self) -> str:
         pass
+
+zero_coef_1 = Rational(Integer(Natural([0, 2]), False), Natural([4])) # -5
+first_coef_1 = Rational(Integer(Natural([2, 3]), False), Natural([4])) # 8
+second_coef_1 = Rational(Integer(Natural([2, 1]), False), Natural([4])) # -3
+third_coef_1 = Rational(Integer(Natural([6, 1]), False), Natural([4])) # -4
+forth_coef_1 = Rational(Integer(Natural([8]), False), Natural([4])) # 2
+first_polym = Polynomial([zero_coef_1, first_coef_1, second_coef_1, third_coef_1, forth_coef_1]) # -5+8x-3x^2-4x^3+2x^4+x^6
+zero_coef_2 = Rational(Integer(Natural([2])), Natural([2])) # 1
+first_coef_2 = Rational(Integer(Natural([3]), False), Natural([2])) # -1
+second_coef_2 = Rational(Integer(Natural([6]), False), Natural([2])) # 1
+third_coef_2 = Rational(Integer(Natural([3]), False), Natural([2])) # 0
+forth_coef_2 = Rational(Integer(Natural([4]), False), Natural([2])) # 0
+second_polym = Polynomial([zero_coef_2, first_coef_2, second_coef_2, third_coef_2, forth_coef_2]) # 1-x+x^2+x^5
+A = SUB_PP_P()
+result = A.execute([second_polym, first_polym])[0]
+print(f'\n\n{second_polym} - \n {first_polym} = \n{result}, {len(result.coefficients)}')
+print(str(result.coefficients[-1].numerator))
+print(*(str(i) for i in result.coefficients))
+
+coef = Rational(Integer(Natural([0]), False), Natural([52]))
+polu = Polynomial(coef)
+print()

@@ -25,8 +25,8 @@ class MOD_PP_P(gm.AbstractModule):
 
         # находим частное, умножаем на делитель и отнимаем полученный полином от делимого
         div_pol = self.div.execute([copy.deepcopy(args[0]), copy.deepcopy(args[1])])[0]
-        mul_for_sub_pol = self.mul.execute([args[1], div_pol])[0]
-        result_polynomial = self.sub.execute([args[0], mul_for_sub_pol])[0]
+        mul_for_sub_pol = self.mul.execute([copy.deepcopy(args[1]), div_pol])[0]
+        result_polynomial = self.sub.execute([copy.deepcopy(args[0]), mul_for_sub_pol])[0]
         result_polynomial.simplify()
 
         return [result_polynomial]

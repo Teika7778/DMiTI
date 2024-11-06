@@ -29,7 +29,7 @@ class DIV_PP_P_new(gm.AbstractModule):
         if len(args) != 2:
             raise ValueError("Function DIV_PP_P takes only 2 args.")
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
-            raise ValueError("Invalid data type in DIV_PP_P: must be Polynomial.")
+            raise ValueError("Invalid data type in DIV_PP_P: must be Polynomial .")
         
         dividend, divisor = copy.deepcopy(args[0]), copy.deepcopy(args[1])
         # если степень числителя меньше степени знаменателя

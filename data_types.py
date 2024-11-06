@@ -100,7 +100,7 @@ class Polynomial(DataType):
         for coef in self.coefficients:
             coef.simplify()
 
-        while len(self.coefficients) > 1 and str(self.coefficients[-1].numerator) == '0':
+        while len(self.coefficients) > 1 and str(self.coefficients[-1]) == '0':
             self.coefficients.pop()
 
 

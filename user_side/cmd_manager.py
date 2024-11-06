@@ -1,15 +1,43 @@
+from command.cmd import CMD
+from command.hlp import HLP
+from command.put import PUT
+
+
 class CmdManager:
-    """
-    В cmd_string содержится строка-команда, нужно рассмотреть первые 3 символа, запустить нужную команду
-    в нее нужно передать уже преобразованную строку.
-    Преобразование строки:
-    1. Если в ней не содержится символ | (вертекальная черта), то нужно просто провести разделение по пробелам, в итоге
-    должен получиться массив
-    Пример: PUT var1 INT +50 ---> [var1; INT; +50]
-    2. Если в ней содержится символ |, то нужно разделить сначала по этому символу, а потом уже по пробелу внутри
-    строк, в итоге должен получиться массив массивов.
-    Пример: CMD ADD_ZZ_Z var1 | var2 var3 - [[ADD_ZZ_Z; var1]; [var2; var3]]
-    Желательно также чтобы двойные пробелы в строке не на что не влияли
-    """
-    def process_cmd(self, cmd_string, var_stack):
-        pass
+    def __init__(self):
+        self.commands_dict = {
+            "CMD": CMD(),
+            "PUT": PUT(),
+            "HLP": HLP()
+        }
+
+    def process_cmd(self, cmd_string: str, window):
+        while "  " in cmd_string or " |" in cmd_string or "| " in cmd_string:
+            cmd_string = cmd_string.replace("  ", " ")
+            cmd_string = cmd_string.replace(" |", "|")
+            cmd_string = cmd_string.replace("| ", "|")
+        if '|' in cmd_string:
+            args = cmd_string.split('|')
+            for i in range(len(args)):
+                args[i] = args[i].split(' ')
+            if len(args) == 0:
+                raise ValueError()
+            command_tag = args[0][0]
+            args = args[0][1:]
+        else:
+            args = cmd_string.split(' ')
+            if len(args) == 0:
+                raise ValueError()
+            command_tag = args[0]
+            args = args[1:]
+
+        if command_tag not in self.commands_dict:
+            raise ValueError()
+        self.commands_dict[command_tag].execute(args, window)
+
+
+
+
+m = CmdManager()
+m.process_cmd("CMD AAA A A  A AA A  F | FF fF          D               | F", 0)
+

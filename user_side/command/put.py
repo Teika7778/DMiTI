@@ -1,4 +1,4 @@
-import generic_command
+from user_side.command.generic import AbstractCommand
 
 """
 Помещает в var_stack переменную
@@ -7,7 +7,9 @@ import generic_command
 тип переменной (INT, NAT, RAT, POL)
 значение
 """
-class PUT(generic_command):
+
+
+class PUT(AbstractCommand):
     def execute(self, args, window):
         pass
 

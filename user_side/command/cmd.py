@@ -1,7 +1,7 @@
-import generic_command
+from user_side.command import generic
 
 
-class CMD(generic_command):
+class CMD(generic.AbstractCommand):
     def execute(self, args, window):
         pass
 

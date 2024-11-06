@@ -3,10 +3,10 @@
 если принимает 1 аргумент, то это должно быть название модуля, и нужно вывести reference этого модуля или команды
 """
 
-import generic_command
+from user_side.command.generic import AbstractCommand
 
 
-class HLP(generic_command):
+class HLP(AbstractCommand):
     def execute(self, args, window):
         pass
 

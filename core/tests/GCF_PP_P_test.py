@@ -49,3 +49,5 @@ class GCF_PP_P_test(unittest.TestCase):
                                      Rational(Integer(Natural([1]), True), Natural([1]))])
         self.assertEqual([str(elem) for elem in result.coefficients], [str(elem) for elem in correct_answer.coefficients])
 
+if __name__ == '__main__':
+    unittest.main()

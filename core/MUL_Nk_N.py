@@ -17,4 +17,10 @@ class MUL_Nk_N(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a natural number by 10^k (k-natural or 0) [NATURAL. NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - multiplier\n"
+                "\t2: Natural - degree of 10^k\n"
+                "Returns:\n"
+                "\t1: Natural - product of multiplication\n"
+                "Author: Artyom Grebenshchikov\n")

@@ -17,4 +17,9 @@ class TRANS_Q_Z(gm.AbstractModule):
         return [result_integer]
     
     def reference(self) -> str:
-        pass
+        return ("Convert fractional with 1 in denominator to integer number [RATIONAL -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Rational (with 1 in denominator) - number to convert\n"
+                "Returns:\n"
+                "\t1: Integer - converted number\n"
+                "Author: Timofey Komarenko\n")

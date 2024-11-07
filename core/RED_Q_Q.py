@@ -37,4 +37,9 @@ class RED_Q_Q(gm.AbstractModule):
                 
         
     def reference(self) -> str:
-        pass
+        return ("Reduction of fractional number [RATIONAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Rational - number to reduce\n"
+                "Returns:\n"
+                "\t1: Rational - reduced number\n"
+                "Author: Timofey Komarenko\n")

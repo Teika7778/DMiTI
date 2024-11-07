@@ -32,4 +32,10 @@ class MUL_ZZ_Z(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a integer by a integer [INTEGER. INTEGER -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Integer - multiplier\n"
+                "\t2: Integer - multiplicand\n"
+                "Returns:\n"
+                "\t1: Integer - product of multiplication\n"
+                "Author: Sofia Skryabina\n")

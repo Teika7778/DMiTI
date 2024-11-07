@@ -6,9 +6,4 @@
 from command.generic import AbstractCommand
 
 
-class HLP(AbstractCommand):
-    def execute(self, args, window):
-        pass
 
-    def reference(self) -> str:
-        pass

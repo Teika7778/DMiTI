@@ -29,4 +29,10 @@ class MOD_ZZ_Z(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Calculate the remainder of dividing an integer by an integer (mod) [INTEGER. INTEGER -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Integer - a divisible number\n"
+                "\t2: Integer - a divisor number (modulus) \n"
+                "Returns:\n"
+                "\t1: Integer - result remainder\n"
+                "Author: Dmitry Kashutin\n")

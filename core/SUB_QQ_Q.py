@@ -44,4 +44,11 @@ class SUB_QQ_Q(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Subtracting a fractional from a fractional [RATIONAL, RATIONAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Rational - minuend number\n"
+                "\t2: Rational - subtrahend number\n"
+                "Returns:\n"
+                "\t1: Rational - difference\n"
+                "Author: Erdni Baatyrov\n")
+

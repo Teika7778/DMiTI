@@ -37,4 +37,10 @@ class SUB_PP_P(gm.AbstractModule):
         return [result_polynomial]
 
     def reference(self) -> str:
-        pass
+        return ("Subtracting a polynomial from a polynomial [POLYNOMIAL, POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - minuend number\n"
+                "\t2: Polynomial - subtrahend number\n"
+                "Returns:\n"
+                "\t1: Polynomial - difference\n"
+                "Author: Anastasia Dorogushina\n")

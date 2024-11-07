@@ -38,4 +38,10 @@ class SUB_NN_N(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Subtracting a natural from a natural [NATURAL, NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - minuend number\n"
+                "\t2: Natural - subtrahend number\n"
+                "Returns:\n"
+                "\t1: Natural - difference\n"
+                "Author: Alexandra Tarakanova\n")

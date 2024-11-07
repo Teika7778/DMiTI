@@ -22,4 +22,9 @@ class DEG_P_N(gm.AbstractModule):
         return [Natural(degree)]  # Возвращаем массив с единственным элементом — степенью многочлена
     
     def reference(self) -> str:
-        return "DEG_P_N - Determines the degree of a polynomial."
+        return ("Degree of polynomial [POLYNOMIAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - polynomial whose degree will be calculated\n"
+                "Returns:\n"
+                "\t1: Natural - degree of said polynomial\n"
+                "Author: Erdnya Baatyrov\n")

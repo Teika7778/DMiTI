@@ -16,4 +16,9 @@ class TRANS_Z_N(gm.AbstractModule):
         return [copy.deepcopy(args[0].natural)]  # возвращаем копию натурального числа
 
     def reference(self) -> str:
-        pass
+        return ("Convert positive integer to natural number [INTEGER -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Integer (positive) - number to convert\n"
+                "Returns:\n"
+                "\t1: Natural - converted number\n"
+                "Author: Dmitry Kashutin\n")

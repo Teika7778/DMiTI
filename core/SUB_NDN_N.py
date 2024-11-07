@@ -36,4 +36,11 @@ class SUB_NDN_N(gm.AbstractModule):
         # т.к. прописаны в логике вычитания
 
     def reference(self) -> str:
-        pass
+        return (
+            "Subtracting a natural number multiplied by a natural in the range [0,9] from a natural [NATURAL, NATURAL (DIGIT) -> NATURAL]\n"
+            "Arguments:\n"
+            "\t1: Natural - minuend number\n"
+            "\t2: Digit - multiplier\n"
+            "Returns:\n"
+            "\t1: Natural - difference\n"
+            "Author: Alexey Maidurov\n")

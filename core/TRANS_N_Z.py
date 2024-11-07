@@ -15,4 +15,9 @@ class TRANS_N_Z(gm.AbstractModule):
         return [Integer(result)]  # вызываем конструктор целого числа
 
     def reference(self) -> str:
-        pass
+        return ("Convert natural to integer number [NATURAL -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Natural - number to convert\n"
+                "Returns:\n"
+                "\t1: Integer - converted number\n"
+                "Author: Dmitry Kashutin\n")

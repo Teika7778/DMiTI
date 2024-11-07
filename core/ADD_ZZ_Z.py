@@ -31,4 +31,10 @@ class ADD_ZZ_Z(gm.AbstractModule):
         return [Integer(Natural(self.add_nn_n.execute([addent_1.natural, addent_2.natural])[0].numbers), is_positive=False if self.poz.execute([addent_1])[0].numbers == [1] else True)]
 
     def reference(self) -> str:
-        pass
+        return ("Addition of integers [INTEGER, INTEGER -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Integer - first term\n"
+                "\t2: Integer - second term\n"
+                "Returns:\n"
+                "\t1: Integer - their sum\n"
+                "Author: Sofia Skryabina\n")

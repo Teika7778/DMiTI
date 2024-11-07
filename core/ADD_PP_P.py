@@ -27,4 +27,10 @@ class ADD_PP_P(gm.AbstractModule):
         return [result_polynomial]
 
     def reference(self) -> str:
-        pass
+        return ("Addition of polynomials [POLYNOMIAL, POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - first term\n"
+                "\t2: Polynomial - second term\n"
+                "Returns:\n"
+                "\t1: Polynomial - their sum\n"
+                "Author: Anastasiya Dorogushina\n")

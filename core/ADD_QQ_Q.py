@@ -44,5 +44,11 @@ class ADD_QQ_Q(gm.AbstractModule):
         return [Rational(numerator_sum, lcm_denom)]
 
     def reference(self) -> str:
-        return "Модуль для сложения рациональных чисел"
+        return ("Addition of rationals [RATIONAL, RATIONAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Rational - first term\n"
+                "\t2: Rational - second term\n"
+                "Returns:\n"
+                "\t1: Rational - their sum\n"
+                "Author: Erdnya Baatyrov\n")
 

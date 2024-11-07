@@ -16,4 +16,9 @@ class POZ_Z_D(gm.AbstractModule):
             return [Natural([2])] if args[0].is_positive else [Natural([1])]   # если знак положительный, возвращаем 2, иначе 1
 
     def reference(self) -> str:
-        pass
+        return ("Checking if a number is positive, zero or negative [INTEGER -> DIGIT]\n"
+                "Arguments:\n"
+                "\t1: Integer - number to check\n"
+                "Returns:\n"
+                "\t1: Digital - result (2 - positive, 0 - zero, 1 - negative)\n"
+                "Author: Dmitry Kashutin\n")

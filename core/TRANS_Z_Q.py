@@ -15,4 +15,9 @@ class TRANS_Z_Q(gm.AbstractModule):
         rational_number = Rational(numerator, denominator)
         return [rational_number]
     def reference(self) -> str:
-        pass
+        return ("Convert integer to fractional number [INTEGER -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Integer - number to convert\n"
+                "Returns:\n"
+                "\t1: Rational - converted number\n"
+                "Author: Timofey Komarenko\n")

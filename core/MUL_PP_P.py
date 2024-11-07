@@ -25,5 +25,11 @@ class MUL_PP_P(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a polynomial by a polynomial [POLYNOMIAL. POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - multiplier\n"
+                "\t2: Polynomial - multiplicand\n"
+                "Returns:\n"
+                "\t1: Polynomial - product of multiplication\n"
+                "Author: Gleb Khorchev\n")
 

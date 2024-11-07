@@ -28,4 +28,10 @@ class ADD_NN_N(gm.AbstractModule):
 
         return [Natural(result)]
     def reference(self) -> str:
-        pass
+        return ("Addition of natural numbers [NATURAL, NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - first term\n"
+                "\t2: Natural - second term\n"
+                "Returns:\n"
+                "\t1: Natural - their sum\n"
+                "Author: Artem Grebenshikov\n")

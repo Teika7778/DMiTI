@@ -17,4 +17,10 @@ class MUL_QQ_Q(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a fractional by a fractional [RATIONAL. RATIONAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Rational - multiplier\n"
+                "\t2: Rational - multiplicand\n"
+                "Returns:\n"
+                "\t1: Rational - product of multiplication\n"
+                "Author: Gleb Khorchev\n")

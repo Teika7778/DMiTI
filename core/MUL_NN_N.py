@@ -33,4 +33,10 @@ class MUL_NN_N(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a natural by a natural [NATURAL. NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - multiplier\n"
+                "\t2: Natural - multiplicand\n"
+                "Returns:\n"
+                "\t1: Natural - product of multiplication\n"
+                "Author: Artyom Grebenshchikov\n")

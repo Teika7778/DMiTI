@@ -25,4 +25,11 @@ class MUL_ND_N(gm.AbstractModule):
         return [Natural(result)]
 
     def reference(self) -> str:
-        pass
+        return (
+            "Multiplication of a natural number by a natural in the range [0,9] (digit) [NATURAL. NATURAL (DIGIT) -> NATURAL]\n"
+            "Arguments:\n"
+            "\t1: Natural - multiplier\n"
+            "\t2: Natural - multiplicand digit in the range [0,9] \n"
+            "Returns:\n"
+            "\t1: Natural - product of multiplication\n"
+            "Author: Artyom Grebenshchikov\n")

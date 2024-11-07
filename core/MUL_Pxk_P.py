@@ -16,5 +16,11 @@ class MUL_Pxk_P(gm.AbstractModule):
         return [result]
 
     def reference(self) ->str:
-        pass
+        return ("Multiplication of a polynomial by x^k (k-natural or 0) [POLYNOMIAL. NATURAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - multiplier\n"
+                "\t2: Natural - degree of x^k\n"
+                "Returns:\n"
+                "\t1: Rational - product of multiplication\n"
+                "Author: Gleb Khorchev\n")
 

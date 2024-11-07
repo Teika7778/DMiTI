@@ -27,4 +27,10 @@ class MUL_PQ_P(gm.AbstractModule):
         return [result_polynomial]  # Возвращаем как массив
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a polynomial by a fractional [POLYNOMIAL. RATIONAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - multiplier\n"
+                "\t2: Rational - multiplicand\n"
+                "Returns:\n"
+                "\t1: Polynomial - product of multiplication\n"
+                "Author: Erdni Baatyrov\n")

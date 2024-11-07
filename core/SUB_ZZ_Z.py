@@ -55,4 +55,10 @@ class SUB_ZZ_Z(gm.AbstractModule):
                 
         
     def reference(self) -> str:
-        pass
+        return ("Subtracting an integer from an integer [INTEGER, INTEGER -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Integer - minuend number\n"
+                "\t2: Integer - subtrahend number\n"
+                "Returns:\n"
+                "\t1: Integer - difference\n"
+                "Author: Timofey Komarenko\n")

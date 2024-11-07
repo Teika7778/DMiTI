@@ -23,4 +23,10 @@ class COM_NN_D(gm.AbstractModule):  #сравнение натуральных �
         return [Natural([0])]  # Числа равны
     
     def reference(self) -> str:
-        pass
+        return ("Comparison of natural numbers [NATURAL, NATURAL -> DIGIT]\n"
+                "Arguments:\n"
+                "\t1: Natural - first term\n"
+                "\t2: Natural - second term\n"
+                "Returns:\n"
+                "\t1: Digit - 0 if terms are equal, 1 if second term is greater, 2 otherwise\n"
+                "Author: Artem Grebenshikov\n")

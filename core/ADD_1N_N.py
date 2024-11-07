@@ -22,6 +22,11 @@ class ADD_1N_N(gm.AbstractModule):
         return [Natural(numbers)]  # одних лишь 9, поэтому надо сделать еще один разряд
 
     def reference(self) -> str:
-        pass
+        return ("Add 1 to a natural number [NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - number to increase\n"
+                "Returns:\n"
+                "\t1: Natural - increased number\n"
+                "Author: Aleksei Maidurov\n")
 
 

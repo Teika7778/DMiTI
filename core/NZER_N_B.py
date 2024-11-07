@@ -12,4 +12,9 @@ class NZER_N_B(gm.AbstractModule):
         return [True]
 
     def reference(self) -> str:
-        pass
+        return ("Checking if a natural number is not zero [NATURAL -> BOOLEAN]\n"
+                "Arguments:\n"
+                "\t1: Natural - number to check\n"
+                "Returns:\n"
+                "\t1: Boolean - result (true - is not zero, false - is zero)\n"
+                "Author: Alexandra Tarakanova\n")

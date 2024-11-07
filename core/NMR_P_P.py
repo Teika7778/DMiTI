@@ -33,4 +33,9 @@ class NMR_P_P(gm.AbstractModule):
         return [result_polynomial]
 
     def reference(self) -> str:
-        pass
+        return ("Transformation of polynomial - multiple roots to simple roots [POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - to transform\n"
+                "Returns:\n"
+                "\t1: Polynomial - transformed result\n"
+                "Author: Anastasia Dorogushina\n")

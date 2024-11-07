@@ -18,4 +18,9 @@ class MUL_ZM_Z(gm.AbstractModule):
         return [result]                                   # возвращаем копию целого числа с новым знаком
 
     def reference(self) -> str:
-        pass
+        return ("Multiplication of a integer by -1 [INTEGER -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Integer - multiplier\n"
+                "Returns:\n"
+                "\t1: Integer - product of multiplication\n"
+                "Author: Dmitry Kashutin\n")

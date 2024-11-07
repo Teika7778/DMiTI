@@ -116,7 +116,8 @@ class CmdManager:
     def __init__(self):
         self.commands_dict = {
             "CMD": CMD(),
-            "PUT": PUT()
+            "PUT": PUT(),
+            "HLP": HLP()
         }
 
     def process_cmd(self, cmd_string: str, window):
@@ -155,6 +156,19 @@ class PUT(AbstractCommand):
         pass
 
 
+class HLP(AbstractCommand):
+    def execute(self, args, window: ConsoleApp):
+        if len(args) != 1:
+            raise ValueError()
+        name_parser = ModuleNameParser()
+        if args[0] in name_parser.names:
+            mod = name_parser.parse(args[0])
+            window.display_text(mod.reference())
+
+    def reference(self) -> str:
+        pass
+
+
 class CMD(AbstractCommand):
     def execute(self, args, window: ConsoleApp):
         print(args)
@@ -173,7 +187,6 @@ class CMD(AbstractCommand):
             raise ValueError()
         for i in range(len(args[0])):
             window.var_stack[args[0][i]] = res[i]
-
 
     def reference(self) -> str:
         pass

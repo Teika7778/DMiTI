@@ -13,9 +13,9 @@ class ABS_Z_N(gm.AbstractModule):
         return [copy.deepcopy(integer.natural)]  # возвращаем массив
 
     def reference(self) -> str:
-        return ("Absolute value [INTEGER -> NATURAL]\n"
+        return ("Absolute value of number [INTEGER -> NATURAL]\n"
                 "Arguments:\n"
                 "\t1: Integer - number whose absolute value will be calculated\n"
                 "Returns:\n"
                 "\t1: Natural - said absolute value\n"
-                "Author: Sofia Skryabina\n")
+                "Author: Sofia Skryabina \n")

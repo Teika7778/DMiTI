@@ -39,7 +39,7 @@ class DIV_PP_P(gm.AbstractModule):
         result_coefficients = []
         degree_difference = len(dividend.coefficients) - len(divisor.coefficients)
         #Изначально знаем степень ответа
-        for _ in range(len(dividend.coefficients) - len(divisor.coefficients)+1):
+        for _ in range(degree_difference + 1):
             result_coefficients.append(Rational(Integer(Natural([0])), Natural([1])))
         # цикл пока степень делимого больше или равна степени делителя
         result_degree_counter = len(dividend.coefficients) - len(divisor.coefficients)
@@ -67,4 +67,10 @@ class DIV_PP_P(gm.AbstractModule):
         res_pol.simplify()
         return [res_pol]
     def reference(self) -> str:
-        pass
+        return ("Subtracting a polynomial from a polynomial [POLYNOMIAL, POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - minuend number\n"
+                "\t2: Polynomial - subtrahend number\n"
+                "Returns:\n"
+                "\t1: Polynomial - difference\n"
+                "Author: Anastasia Dorogushina\n")

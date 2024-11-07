@@ -3,7 +3,7 @@
 вернуть тип данных, либо полученный из парсинга строки, либо извлечением из стэка переменных
 """
 # для получения значения, то перед ней нужно поставить *
-from data_types_parser import DataTypeParser
+from parsers.data_types_parser import DataTypeParser
 
 
 class ArgumentParser:

@@ -9,8 +9,13 @@ class ABS_Z_N(gm.AbstractModule):
             raise ValueError("Improper arguments: function takes only 1 arg")
         integer = args[0]
         if not isinstance(integer, Integer):  # проверка типа
-            raise ValueError("Invalid data type: must be integer")
+            raise ValueError("Invalid data type: args must be integer")
         return [copy.deepcopy(integer.natural)]  # возвращаем массив
 
     def reference(self) -> str:
-        pass
+        return ("Absolute value [INTEGER -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Integer - number whose absolute value will be calculated\n"
+                "Returns:\n"
+                "\t1: Natural - said absolute value\n"
+                "Author: Sofia Skryabina\n")

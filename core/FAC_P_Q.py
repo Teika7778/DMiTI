@@ -32,4 +32,9 @@ class FAC_P_Q(gm.AbstractModule):
         return [result]
     
     def reference(self) -> str:
-        pass
+        return ("Taking the least common multiple of the denominators of the coefficients and the greatest common divisor of the numerators out of a polynomial [POLYNOMIAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - original\n"
+                "Returns:\n"
+                "\t1: Rational - greatest common divisor of the numerators divide by least common multiple of the denominators\n"
+                "Author: Gleb Khorchev\n")

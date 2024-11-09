@@ -33,4 +33,9 @@ class DER_P_P(gm.AbstractModule):
         return [result_polynomial]
 
     def reference(self) -> str:
-        pass
+        return ("Take the derivative of the polynomial [POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - original\n"
+                "Returns:\n"
+                "\t1: Polynomial - derivative\n"
+                "Author: Anastasia Dorogushina\n")

@@ -31,4 +31,10 @@ class GCF_PP_P(gm.AbstractModule):
             return [arg0_copy]
 
     def reference(self) -> str:
-        pass
+        return ("Greatest common divisor of polynomials [POLYNOMIAL. POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - first\n"
+                "\t2: Polynomial - second\n"
+                "Returns:\n"
+                "\t1: Polynomial - greatest common divisor\n"
+                "Author: Gleb Khorchev\n")

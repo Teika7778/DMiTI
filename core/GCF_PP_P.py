@@ -19,10 +19,6 @@ class GCF_PP_P(gm.AbstractModule):
         # Пока степени обоих не равны нулю
         while len(arg0_copy.coefficients) > 1 and len(arg1_copy.coefficients) > 1:
             # если степень первого больше
-            print([str(elem) for elem in arg0_copy.coefficients])
-            print([str(elem) for elem in arg1_copy.coefficients])
-            print("next")
-
             if len(arg0_copy.coefficients) > len(arg1_copy.coefficients):
                 # делим на второй
                 arg0_copy = self.mod_pp_p.execute([arg0_copy, arg1_copy])[0]

@@ -24,4 +24,10 @@ class LCM_NN_N(gm.AbstractModule):
         return self.div_nn.execute([mul_args, gcf_args])  # Подсчет НОК
 
     def reference(self) -> str:
-        pass
+        return ("Least common multiple of natural numbers [NATURAL. NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - first\n"
+                "\t2: Natural - second\n"
+                "Returns:\n"
+                "\t1: Natural - least common multiple\n"
+                "Author: Artyom Grebenshchikov\n")

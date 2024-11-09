@@ -29,7 +29,7 @@ class DIV_PP_P(gm.AbstractModule):
         if len(args) != 2:
             raise ValueError("Function DIV_PP_P takes only 2 args.")
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
-            raise ValueError("Invalid data type in DIV_PP_P: must be Polynomial .")
+            raise ValueError("Invalid data type in DIV_PP_P: must be Polynomial.")
         
         dividend, divisor = copy.deepcopy(args[0]), copy.deepcopy(args[1])
         # если степень числителя меньше степени знаменателя
@@ -66,11 +66,12 @@ class DIV_PP_P(gm.AbstractModule):
         res_pol = Polynomial(result_coefficients)
         res_pol.simplify()
         return [res_pol]
+
     def reference(self) -> str:
-        return ("Subtracting a polynomial from a polynomial [POLYNOMIAL, POLYNOMIAL -> POLYNOMIAL]\n"
+        return ("Quotient from dividing a polynomial by a polynomial when dividing with remainder [POLYNOMIAL, POLYNOMIAL -> POLYNOMIAL]\n"
                 "Arguments:\n"
-                "\t1: Polynomial - minuend number\n"
-                "\t2: Polynomial - subtrahend number\n"
+                "\t1: Polynomial - dividend\n"
+                "\t2: Polynomial - divider\n"
                 "Returns:\n"
-                "\t1: Polynomial - difference\n"
+                "\t1: Polynomial - quotient\n"
                 "Author: Anastasia Dorogushina\n")

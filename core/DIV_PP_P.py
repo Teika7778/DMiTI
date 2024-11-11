@@ -10,6 +10,7 @@ from core.MUL_PQ_P import MUL_PQ_P
 # вычитание многочленов
 from core.MUL_PP_P import MUL_PP_P
 from core.SUB_PP_P import SUB_PP_P
+from core.RED_Q_Q import RED_Q_Q
 # сложение многочленов хоть и есть в зависимостях, не используется
 from data_types import *
 import copy
@@ -23,6 +24,7 @@ class DIV_PP_P(gm.AbstractModule):
         self.mul_xk = MUL_Pxk_P()
         self.mul = MUL_PQ_P()
         self.sub = SUB_PP_P()
+        self.red = RED_Q_Q()
     
     def execute(self, args):
         # проверка поданных аргументов
@@ -52,10 +54,12 @@ class DIV_PP_P(gm.AbstractModule):
             mult_devisor = self.mul_xk.execute([divisor, Natural(degree_digits)])[0]
             #Находим коэфициент при этой степени
             coefficient_for_mul = self.div.execute([dividend.coefficients[-1], divisor.coefficients[-1]])[0]
-            #Записываем коэфициент в ответ
-            result_coefficients[result_degree_counter] = coefficient_for_mul
+            # Сокращаем дробь
+            red_coefficient_for_mul = self.red.execute([coefficient_for_mul])[0]
+            # Записываем коэфициент в ответ
+            result_coefficients[result_degree_counter] = red_coefficient_for_mul
             #Умножаем на коэфициент и находим полином, который нужно вычесть из делимого
-            sub_polynom = self.mul.execute([mult_devisor, coefficient_for_mul])[0]
+            sub_polynom = self.mul.execute([mult_devisor, red_coefficient_for_mul])[0]
             #результат вычитания
             new_dividend = self.sub.execute([dividend, sub_polynom])[0]
             #Передвигаем счётчик на столько единиц, насколько уменьшилась степень

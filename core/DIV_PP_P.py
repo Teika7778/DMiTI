@@ -66,7 +66,6 @@ class DIV_PP_P(gm.AbstractModule):
             result_degree_counter -= len(dividend.coefficients) - len(new_dividend.coefficients)
             #Делим полином, полученный в результате вычитания
             dividend = new_dividend
-
         res_pol = Polynomial(result_coefficients)
         res_pol.simplify()
         return [res_pol]

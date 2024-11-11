@@ -2,39 +2,36 @@ from core import generic_module as gm
 from data_types import *
 from core.MOD_PP_P import MOD_PP_P
 from core.RED_Q_Q import RED_Q_Q
+from core.DEG_P_N import DEG_P_N
+from core.COM_NN_D import COM_NN_D
+from core.NZER_N_B import NZER_N_B
+
 import copy
 
 
 class GCF_PP_P(gm.AbstractModule):
     def __init__(self):
-        self.mod_pp_p = MOD_PP_P()
+        self.mod_pp = MOD_PP_P()
         self.red = RED_Q_Q()
+        self.deg = DEG_P_N()
+        self.comp = COM_NN_D()
+        self.nzer = NZER_N_B()
 
     def execute(self, args):
         if not len(args) == 2:
             raise ValueError("Improper arguments: function takes 2 arg")
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
             raise ValueError("Invalid data type:  must be polynomial")
-        arg0_copy = copy.deepcopy(args[0])  # Копии многочленов
-        arg1_copy = copy.deepcopy(args[1])
+        result_a = copy.deepcopy(args[0])  # Копии многочленов
+        result_b = copy.deepcopy(args[1])
         # Алгоритм Евклида делением
         # Пока степени обоих не равны нулю
-        while len(arg0_copy.coefficients) > 1 and len(arg1_copy.coefficients) > 1:
-            # если степень первого больше
-            if len(arg0_copy.coefficients) > len(arg1_copy.coefficients):
-                # делим на второй
-                arg0_copy = self.mod_pp_p.execute([arg0_copy, arg1_copy])[0]
-                for degree_counter in range(len(arg0_copy.coefficients)):
-                    arg0_copy.coefficients[degree_counter] = self.red.execute([arg0_copy.coefficients[degree_counter]])[0]
-            else:  # иначе
-                arg1_copy = self.mod_pp_p.execute([arg1_copy, arg0_copy])[0]  # делим на первый
-                for degree_counter in range(len(arg1_copy.coefficients)):
-                    arg1_copy.coefficients[degree_counter] = self.red.execute([arg1_copy.coefficients[degree_counter]])[0]
 
-        if len(arg0_copy.coefficients) == 1:  # проверяем, какой не равен нулю
-            return [arg1_copy]
-        else:
-            return [arg0_copy]
+        while self.nzer.execute([self.deg.execute([result_b])[0]])[0] and self.comp.execute([self.deg.execute([result_b])[0], self.deg.execute([result_a])[0]])[0].numbers[0] != 2:  # пока result_b < result_a
+            result_a, result_b = result_b, self.mod_pp.execute([result_a, result_b])[0]  # Меняем значение местами,
+            # заменяя b делением с остатком a на b
+        return [result_a]
+
 
     def reference(self) -> str:
         return ("Greatest common divisor of polynomials [POLYNOMIAL. POLYNOMIAL -> POLYNOMIAL]\n"

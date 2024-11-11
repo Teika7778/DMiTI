@@ -24,14 +24,18 @@ class GCF_PP_P(gm.AbstractModule):
             raise ValueError("Invalid data type:  must be polynomial")
         result_a = copy.deepcopy(args[0])  # Копии многочленов
         result_b = copy.deepcopy(args[1])
+
+        if self.deg.execute([result_a])[0].numbers[0] == 0:
+            return [Polynomial([Rational(Integer(Natural([1]), True), Natural([1]))])]
+        if self.deg.execute([result_b])[0].numbers[0] == 0:
+            return [Polynomial([Rational(Integer(Natural([1]), True), Natural([1]))])]
+
         # Алгоритм Евклида делением
         # Пока степени обоих не равны нулю
 
-        while self.nzer.execute([self.deg.execute([result_b])[0]])[0] and self.comp.execute([self.deg.execute([result_b])[0], self.deg.execute([result_a])[0]])[0].numbers[0] != 2:  # пока result_b < result_a
-            result_a, result_b = result_b, self.mod_pp.execute([result_a, result_b])[0]  # Меняем значение местами,
-            # заменяя b делением с остатком a на b
+        while self.comp.execute([self.deg.execute([result_b])[0], Natural([1])])[0].numbers[0] != 1 and self.comp.execute([self.deg.execute([result_b])[0], self.deg.execute([result_a])[0]])[0].numbers[0] == 1:  # пока result_b < result_a
+            result_a, result_b = result_b, self.mod_pp.execute([result_a, result_b])[0]  # Меняем значение местами, заменяя b делением с остатком a на b
         return [result_a]
-
 
     def reference(self) -> str:
         return ("Greatest common divisor of polynomials [POLYNOMIAL. POLYNOMIAL -> POLYNOMIAL]\n"

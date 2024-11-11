@@ -90,10 +90,10 @@ class ConsoleApp:
         # Отображаем текст на текстовой области
         if self.last_input != '':
             self.display_text(f"Command executed: {self.last_input}")
-            try:
-                self.manager.process_cmd(self.last_input, self)
-            except ValueError as e:
-                self.display_text("Exception occurred:" + str(e.args))
+            #try:
+            self.manager.process_cmd(self.last_input, self)
+            #except ValueError as e:
+            #    self.display_text("Exception occurred:" + str(e.args))
 
         self.update_right_area()
         # Очищаем поле ввода
@@ -177,8 +177,8 @@ class HLP(AbstractCommand):
         if args[0] == "PUT":
             window.display_text(PUT().reference())
         if args[0] == "LIST":
-            for name, value in name_parser.names:
-                print(value.reference())
+            for value in name_parser.names.keys():
+                window.display_text(value)
 
 
     def reference(self) -> str:

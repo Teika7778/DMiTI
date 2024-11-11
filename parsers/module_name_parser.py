@@ -99,5 +99,5 @@ class ModuleNameParser:
     def parse(self, string):
         print(string)
         if string not in self.names:
-            raise ValueError()
+            raise ValueError("No such module")
         return self.names[string]

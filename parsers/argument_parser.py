@@ -9,13 +9,13 @@ from parsers.data_types_parser import DataTypeParser
 class ArgumentParser:
     def parse(self, string, var_stack):
         if len(string) == 0:
-            raise ValueError()
+            raise ValueError("Empty string")
         if string[0] == '*':
             string = string[1:]
             if string in var_stack:
                 return var_stack[string]
             else:
-                raise ValueError()
+                raise ValueError("No such var in var stack")
         else:
             pars = DataTypeParser()
             return pars.str_to_datatype(string)

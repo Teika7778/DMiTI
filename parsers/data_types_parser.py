@@ -11,7 +11,7 @@ class DataTypeParser:
 
     def str_to_datatype(self, string: str):
         if len(string) == 0:
-            raise ValueError()
+            raise ValueError("Empty string")
         if string[0] == 'P':
             string = string[1:]
             return self.parse_polynomial(string)
@@ -26,17 +26,17 @@ class DataTypeParser:
     def parse_natural(self, string: str):
         for char in string:
             if char not in self.valid:
-                raise ValueError()
+                raise ValueError("Invalid char in Natural number")
         if len(string) == 0:
-            raise ValueError()
-        if string[0] == '0':
-            raise ValueError()
+            raise ValueError("Empty string")
+        if string[0] == '0' and len(string) != 1:
+            raise ValueError("Number shouldn't begin with 0")
         nums = list(map(int, list(string)[::-1]))
         return Natural(nums)
 
     def parse_integer(self, string: str):
         if len(string) == 0:
-            raise ValueError()
+            raise ValueError("Empty string")
         if string[0] == '+':
             return Integer(self.parse_natural(string[1:]))
         if string[0] == '-':
@@ -44,16 +44,16 @@ class DataTypeParser:
 
     def parse_rational(self, string: str):
         if len(string) == 0:
-            raise ValueError()
+            raise ValueError("Empty string")
         if '/' not in string:
             top = self.parse_integer(string)
             bot = Natural([1])
         else:
             sliced = string.split('/')
             if len(sliced) != 2:
-                raise ValueError()
+                raise ValueError("Invalid rational form")
             if sliced[1] == '0':
-                raise ValueError()
+                raise ValueError("Cannot divide by 0")
             top = self.parse_integer(sliced[0])
             bot = self.parse_natural(sliced[1])
         return Rational(top, bot)

@@ -90,7 +90,10 @@ class ConsoleApp:
         # Отображаем текст на текстовой области
         if self.last_input != '':
             self.display_text(f"Command executed: {self.last_input}")
-            self.manager.process_cmd(self.last_input, self)
+            try:
+                self.manager.process_cmd(self.last_input, self)
+            except ValueError as e:
+                self.display_text("Exception occurred:" + str(e.args))
 
         self.update_right_area()
         # Очищаем поле ввода
@@ -130,50 +133,64 @@ class CmdManager:
             for i in range(len(args)):
                 args[i] = args[i].split(' ')
             if len(args) == 0:
-                raise ValueError()
+                raise ValueError("Empty string")
             command_tag = args[0][0]
             args[0] = args[0][1:]
         else:
             args = cmd_string.split(' ')
             if len(args) == 0:
-                raise ValueError()
+                raise ValueError("Empty string")
             command_tag = args[0]
             args = args[1:]
 
         if command_tag not in self.commands_dict:
-            raise ValueError()
+            raise ValueError("No such command")
         self.commands_dict[command_tag].execute(args, window)
 
 
 class PUT(AbstractCommand):
     def execute(self, args, window: ConsoleApp):
         if len(args) != 2:
-            raise ValueError()
+            raise ValueError("Invalid args for PUT command")
         pars = ArgumentParser()
         window.var_stack[args[0]] = pars.parse(args[1], window.var_stack)
 
     def reference(self) -> str:
-        pass
+        return "PUT [var_name] [value] - sets variable to given value"
 
 
 class HLP(AbstractCommand):
     def execute(self, args, window: ConsoleApp):
+        if len(args) == 0:
+
+            return
         if len(args) != 1:
-            raise ValueError()
+            raise ValueError("Invalid args for HLP command")
         name_parser = ModuleNameParser()
         if args[0] in name_parser.names:
             mod = name_parser.parse(args[0])
             window.display_text(mod.reference())
+        if args[0] == "HLP":
+            window.display_text(self.reference())
+        if args[0] == "CMD":
+            window.display_text(CMD().reference())
+        if args[0] == "PUT":
+            window.display_text(PUT().reference())
+        if args[0] == "LIST":
+            for name, value in name_parser.names:
+                print(value.reference())
+
 
     def reference(self) -> str:
-        pass
+        return ("HLP (optional: module_name OR cmd_name) \nEither prints general reference for program\n"
+                "or if module_name is given prints reference for this specific module.")
 
 
 class CMD(AbstractCommand):
     def execute(self, args, window: ConsoleApp):
         print(args)
         if len(args) != 2:
-            raise ValueError()
+            raise ValueError("Invalid args for CMD command")
         cmd_name = args[0][0]
         args[0] = args[0][1:]
         name_parser = ModuleNameParser()
@@ -184,12 +201,13 @@ class CMD(AbstractCommand):
             args_t.append(type_parser.parse(arg, window.var_stack))
         res = module.execute(args_t)
         if len(res) != len(args[0]):
-            raise ValueError()
+            raise ValueError("Invalid args for CDM output")
         for i in range(len(args[0])):
             window.var_stack[args[0][i]] = res[i]
 
     def reference(self) -> str:
-        pass
+        return ("CMD [module_name] [var_name1] [var_name2] ... | [value1] [value2] ... \n"
+                "Executes given module with given values and writes results to var_name1, var_name2")
 
 
 # Создаем основное окно и запускаем приложение

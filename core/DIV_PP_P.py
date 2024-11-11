@@ -46,6 +46,8 @@ class DIV_PP_P(gm.AbstractModule):
         # цикл пока степень делимого больше или равна степени делителя
         result_degree_counter = len(dividend.coefficients) - len(divisor.coefficients)
         while len(dividend.coefficients) >= len(divisor.coefficients):
+            #проверка
+            check = len(dividend.coefficients)
             #Считаем разность степеней 
             degree_difference = len(dividend.coefficients) - len(divisor.coefficients)
             #Переводим в список, чтобы можно было подать в Natural()
@@ -66,6 +68,9 @@ class DIV_PP_P(gm.AbstractModule):
             result_degree_counter -= len(dividend.coefficients) - len(new_dividend.coefficients)
             #Делим полином, полученный в результате вычитания
             dividend = new_dividend
+            #обещанная проверка
+            if check == 1:
+                break
         res_pol = Polynomial(result_coefficients)
         res_pol.simplify()
         return [res_pol]

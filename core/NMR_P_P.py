@@ -1,3 +1,4 @@
+import copy
 from core import generic_module as gm
 # НОД многочленов
 from core.GCF_PP_P import GCF_PP_P
@@ -21,9 +22,9 @@ class NMR_P_P(gm.AbstractModule):
         if not (isinstance(args[0], Polynomial)):
             raise ValueError("Invalid data type in NMR_P_P: must be Polynomial.")
 
-        pol = args[0]
+        pol = copy.deepcopy(args[0])
         # находим производную
-        der_pol = self.der.execute(args)[0]
+        der_pol = self.der.execute([pol])[0]
         # НОД многочлена и производной
         gcf_pol_der_pol = self.gcf.execute([pol, der_pol])[0]
         # делим и получаем нужный многочлен

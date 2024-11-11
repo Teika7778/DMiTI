@@ -24,4 +24,10 @@ class GCF_NN_N(gm.AbstractModule):
         return [result_a]
 
     def reference(self) -> str:
-        pass
+        return ("Greatest common divisor of natural numbers [NATURAL. NATURAL -> NATURAL]\n"
+                "Arguments:\n"
+                "\t1: Natural - first\n"
+                "\t2: Natural - second\n"
+                "Returns:\n"
+                "\t1: Natural - greatest common divisor\n"
+                "Author: Artyom Grebenshchikov\n")

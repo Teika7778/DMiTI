@@ -37,4 +37,11 @@ class DIV_NN_N(gm.AbstractModule):
         return [quotient]
 
     def reference(self) -> str:
-        pass
+        return (
+            "Incomplete quotient from dividing the first natural number by the second natural number [NATURAL, NATURAL -> NATURAL]\n"
+            "Arguments:\n"
+            "\t1: Natural - divisible\n"
+            "\t2: Natural - divider\n"
+            "Returns:\n"
+            "\t1: Natural - incomplete quotient\n"
+            "Author: Alexey Maidurov\n")

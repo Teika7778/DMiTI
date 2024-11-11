@@ -21,4 +21,9 @@ class LED_P_Q(gm.AbstractModule):
         return [lead_coeff]  # Возвращаем массив с одним элементом - старшим коэффициентом
 
     def reference(self) -> str:
-        return "LEAD_COEFF_P_Q - Returns the leading coefficient of a polynomial."
+        return ("Senior coefficient of the polynomial [POLYNOMIAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - original\n"
+                "Returns:\n"
+                "\t1: Rational - senior coefficient\n"
+                "Author: Erdni Baatyrov\n")

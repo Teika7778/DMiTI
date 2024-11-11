@@ -17,4 +17,9 @@ class INT_Q_B(gm.AbstractModule):
             return [False]
     
     def reference(self) -> str:
-        pass
+        return ("Checking a reduced fractional by an integer [RATIONAL -> BOOLEAN]\n"
+                "Arguments:\n"
+                "\t1: Rational - reduced fractional\n"
+                "Returns:\n"
+                "\t1: Boolean - result (true - is not zero, false - is zero)\n"
+                "Author: Timofey Komarenko\n")

@@ -22,7 +22,6 @@ class MOD_PP_P(gm.AbstractModule):
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
             raise ValueError("Invalid data type in MOD_PP_P: must be Polynomial.")
 
-
         # находим частное, умножаем на делитель и отнимаем полученный полином от делимого
         div_pol = self.div.execute([copy.deepcopy(args[0]), copy.deepcopy(args[1])])[0]
         mul_for_sub_pol = self.mul.execute([copy.deepcopy(args[1]), div_pol])[0]
@@ -32,4 +31,10 @@ class MOD_PP_P(gm.AbstractModule):
         return [result_polynomial]
 
     def reference(self) -> str:
-        pass
+        return ("The remainder from dividing a polynomial by a polynomial when dividing with a remainder [POLYNOMIAL, POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - dividend\n"
+                "\t2: Polynomial - divider\n"
+                "Returns:\n"
+                "\t1: Polynomial - remainder of division\n"
+                "Author: Anastasia Dorogushina\n")

@@ -64,6 +64,11 @@ class DIV_NN_Dk(gm.AbstractModule):
                 # не забываем домножить на 10^{сдвиг между nepon и делимым}
 
     def reference(self) -> str:
-        pass
-
-
+        return (
+            "First digit of dividing a larger natural by a smaller natural, multiplied by 10^k [NATURAL, NATURAL -> DIGIT]\n"
+            "Arguments:\n"
+            "\t1: Natural - larger\n"
+            "\t2: Natural - smaller\n"
+            "Returns:\n"
+            "\t1: Digit - first of dividing\n"
+            "Author: Alexey Maidurov\n")

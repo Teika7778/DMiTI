@@ -15,4 +15,11 @@ class MOD_NN_N(gm.AbstractModule):
         return SUB_NN_N().execute([divisible, multiplied]) # считаем остаток как разность
 
     def reference(self) -> str:
-        pass
+        return (
+            "The remainder from dividing the first natural number by the second natural number [NATURAL, NATURAL -> NATURAL]\n"
+            "Arguments:\n"
+            "\t1: Natural - divisible\n"
+            "\t2: Natural - divider\n"
+            "Returns:\n"
+            "\t1: Natural - remainder\n"
+            "Author: Alexey Maidurov\n")

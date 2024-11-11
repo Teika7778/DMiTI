@@ -32,4 +32,10 @@ class DIV_QQ_Q(gm.AbstractModule):
         return [Rational(resNumerator, resDenominator)]
 
     def reference(self) -> str:
-        pass
+        return ("Division of fractions [RATIONAL. RATIONAL -> RATIONAL]\n"
+                "Arguments:\n"
+                "\t1: Rational - divisible\n"
+                "\t2: Rational - divider\n"
+                "Returns:\n"
+                "\t1: Rational - product of division\n"
+                "Author: Timofey Komarenko\n")

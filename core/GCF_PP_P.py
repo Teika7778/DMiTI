@@ -19,10 +19,6 @@ class GCF_PP_P(gm.AbstractModule):
         # Пока степени обоих не равны нулю
         while len(arg0_copy.coefficients) > 1 and len(arg1_copy.coefficients) > 1:
             # если степень первого больше
-            print([str(elem) for elem in arg0_copy.coefficients])
-            print([str(elem) for elem in arg1_copy.coefficients])
-            print("next")
-
             if len(arg0_copy.coefficients) > len(arg1_copy.coefficients):
                 # делим на второй
                 arg0_copy = self.mod_pp_p.execute([arg0_copy, arg1_copy])[0]
@@ -35,4 +31,10 @@ class GCF_PP_P(gm.AbstractModule):
             return [arg0_copy]
 
     def reference(self) -> str:
-        pass
+        return ("Greatest common divisor of polynomials [POLYNOMIAL. POLYNOMIAL -> POLYNOMIAL]\n"
+                "Arguments:\n"
+                "\t1: Polynomial - first\n"
+                "\t2: Polynomial - second\n"
+                "Returns:\n"
+                "\t1: Polynomial - greatest common divisor\n"
+                "Author: Gleb Khorchev\n")

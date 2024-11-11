@@ -52,4 +52,10 @@ class DIV_ZZ_Z(gm.AbstractModule):
         return [result]
 
     def reference(self) -> str:
-        pass
+        return ("The quotient from dividing an integer by an integer (mod) [INTEGER. INTEGER -> INTEGER]\n"
+                "Arguments:\n"
+                "\t1: Integer - a divisible number\n"
+                "\t2: Integer - a divisor number (modulus) \n"
+                "Returns:\n"
+                "\t1: Integer - result quotient\n"
+                "Author: Dmitry Kashutin\n")

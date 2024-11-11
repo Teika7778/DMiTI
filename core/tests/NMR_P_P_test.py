@@ -9,16 +9,16 @@ class NMR_P_P_test(unittest.TestCase):
 
     def test_derivative_quadratic(self):
         coef = [
-            Rational(Integer(Natural([9]), True), Natural([1])),  # 9
-            Rational(Integer(Natural([1]), False), Natural([1])),  # -1
-            Rational(Integer(Natural([1]), True), Natural([9]))  # 1/9
+            Rational(Integer(Natural([1]), True), Natural([1])),  # 1
+            Rational(Integer(Natural([6]), True), Natural([1])),  # 6
+            Rational(Integer(Natural([9]), True), Natural([1]))  # 9
         ]
-        p = Polynomial(coef)   # (1/3x-3)^2
+        p = Polynomial(coef)   # (3x+1)^2
         coeff = [
-            Rational(Integer(Natural([3]), False), Natural([1])),  # -3
-            Rational(Integer(Natural([1]), True), Natural([3]))  # 1/3
+            Rational(Integer(Natural([1]), True), Natural([1])),  # 1
+            Rational(Integer(Natural([3]), True), Natural([1]))  # 3
         ]
-        result = self.module.execute([p])[0]    # 1/3x-3
+        result = self.module.execute([p])[0]    # 3x+1
         self.assertEqual([str(coef) for coef in result.coefficients],
                          [str(coef) for coef in coeff])
 

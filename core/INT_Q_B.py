@@ -11,7 +11,7 @@ class INT_Q_B(gm.AbstractModule):
         if not isinstance(rational, Rational):  # проверка типа
             raise ValueError("Invalid data type: must be rational")
         natural = Natural([1])
-        if  (rational.denominator.numbers == natural.numbers):
+        if rational.denominator.numbers == natural.numbers:
             return [True]
         else:
             return [False]

@@ -18,7 +18,7 @@ class ADD_QQ_Q(gm.AbstractModule):
 
     def execute(self, args):
         if len(args) != 2:
-            raise ValueError("Неправильное количество аргументов: функция принимает 2 аргумента")
+            raise ValueError("Wrong number of arguments: function takes 2 arguments")
         if not (isinstance(args[0], Rational) and isinstance(args[1], Rational)):
             raise ValueError("Неправильный тип данных: аргументы должны быть рациональными числами")
 

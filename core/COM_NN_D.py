@@ -4,9 +4,9 @@ from data_types import *
 class COM_NN_D(gm.AbstractModule):  #сравнение натуральных чисел
     def execute(self, args):  
         if len(args) != 2:  #проверка на количество аргументов
-            raise ValueError("Необходимы два массива для сравнения.")  
+            raise ValueError("Two natural numbers are needed for comparison.")
         if not (isinstance(args[0], Natural) and isinstance(args[1], Natural)):#проверка на тип данных
-            raise ValueError()
+            raise ValueError("Two natural numbers are needed for comparison.")
         
         if len(args[0].numbers) > len(args[1].numbers):
             return [Natural([2])]  # Первое число больше

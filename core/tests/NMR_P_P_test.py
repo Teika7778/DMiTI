@@ -15,8 +15,8 @@ class NMR_P_P_test(unittest.TestCase):
         ]
         p = Polynomial(coef)   # (3x+1)^2
         coeff = [
-            Rational(Integer(Natural([1]), True), Natural([1])),  # 1
-            Rational(Integer(Natural([3]), True), Natural([1]))  # 3
+            Rational(Integer(Natural([1]), True), Natural([6])),  # 1
+            Rational(Integer(Natural([1]), True), Natural([2]))  # 3
         ]
         result = self.module.execute([p])[0]    # 3x+1
         self.assertEqual([str(coef) for coef in result.coefficients],
@@ -42,7 +42,7 @@ class NMR_P_P_test(unittest.TestCase):
         ]
         p = Polynomial(coef)  # 9/21
         coeff = [
-            Rational(Integer(Natural([9]), True), Natural([1, 2]))  # 9/21
+            Rational(Integer(Natural([3]), True), Natural([7]))  # 9/21
         ]
         result = self.module.execute([p])[0]  # 9/21
         self.assertEqual([str(coef) for coef in result.coefficients],

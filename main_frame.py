@@ -9,7 +9,7 @@ from parsers.module_name_parser import ModuleNameParser
 class ConsoleApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Консольное окно")
+        self.root.title("CAS")
 
         # ТУТ ВСЯКОЕ ВСПОМОГАТЕЛЬНОЕ, несерьёзное
         self.var_stack = dict()
@@ -76,12 +76,14 @@ class ConsoleApp:
         self.input_field.grid(row=2, column=0, sticky="ew", padx=(10, 10), pady=(5, 2))
 
         # Кнопка для отправки текста
-        self.send_button = tk.Button(root, text="Отправить", command=self.send_input,
+        self.send_button = tk.Button(root, text="Enter", command=self.send_input,
                                      bg=self.bg_color, fg=self.text_color, font=self.font_size)
         self.send_button.grid(row=2, column=1, sticky="e", padx=10, pady=(5, 2))
 
         # Привязка нажатия клавиши Enter к функции send_input
         self.input_field.bind("<Return>", self.send_input)
+
+        self.print_help()
 
     def send_input(self, event=None):
         # Получаем текст от пользователя
@@ -90,10 +92,10 @@ class ConsoleApp:
         # Отображаем текст на текстовой области
         if self.last_input != '':
             self.display_text(f"Command executed: {self.last_input}")
-            #try:
-            self.manager.process_cmd(self.last_input, self)
-            #except ValueError as e:
-            #    self.display_text("Exception occurred:" + str(e.args))
+            try:
+                self.manager.process_cmd(self.last_input, self)
+            except ValueError as e:
+                self.display_text("Exception occurred:" + str(e.args))
 
         self.update_right_area()
         # Очищаем поле ввода
@@ -114,6 +116,48 @@ class ConsoleApp:
             self.right_area.insert(tk.END, f"{var_name}: [{var_type}] {var_value}\n")
         self.right_area.config(state=tk.DISABLED)
 
+    def print_help(self):
+        self.display_text("### Intro:\n"
+                          "This program is a computer algebra system, its main feature is the ability to save values \n"
+                          "into variables. The program supports 3 main commands: CMD, PUT, HLP. CMD allows you to \n"
+                          "perform the specified algebraic transformation, their complete list can be obtained by \n"
+                          "entering HLP LIST, and information about each individual command can be obtained by \n"
+                          "entering HLP [MODULE_NAME]. The program converts strings entered by the user into various \n"
+                          "data types automatically, without requiring explicit indication of the types. In this \n"
+                          "regard, each data type has its own input rules.\n\n\n"
+                          "### Data types:\n"
+                          "1. Naturals: A sequence of digits, and only digits, that does not begin with zero, \n"
+                          "unless it is exactly equal to zero. Example: 1000, 3000, 0.\n"
+                          "2. Integers: + or - sign (required), followed by a valid natural number. Example: +1000, \n"
+                          "-1000, +0\n"
+                          "3. Rationals: The / sign separating the valid integer preceding it and the valid natural \n"
+                          "number following it (not 0). Example: +100/10, -1/1, +21/1\n"
+                          "4. Polynomials: A sequence of rational numbers (and here you can omit the / sign if the \n"
+                          "division occurs by 1) separated by , (without spaces). The problem can be creating a \n"
+                          "polynomial of degree 0; to do this, you need to put the letter P in front of the rational \n"
+                          "number representing it.\n\n\n"
+                          "### Commands:\n"
+                          "The standard syntax for calling an algebraic module is CMD [Module name] [Variable being \n"
+                          "written to or OUT keyword] | [A set of variables or explicitly specified values that \n"
+                          "will be passed as arguments]\n"
+                          "The easiest way to explain the program in detail is with the help of examples.\n\n\n"
+                          "### Some basic examples:\n"
+                          "PUT var1 50 - now the variable var1 contains the natural number 50.\n"
+                          "PUT var2 +50 - now the variable var2 contains the integer 50. \n"
+                          "PUT var3 +50/1 - now the variable var3 contains the rational number 50\n"
+                          "PUT var4 P+50 - now the variable var4 contains the polynomial 50x^0\n"
+                          "PUT varP +50,+20/3,-3 - now the variable varP contains the polynomial 50 + 20/3x - 3x^2\n"
+                          "CMD ADD_NN_N varN | 50 30 - creates new variable varN (Natural number) equal to 50+30=80\n"
+                          "CMD ADD_NN_N OUT | 50 30 - pints the result of the 50+30 operation to the console\n"
+                          "CMD ADD_NN_N OUT | *varN *var1 - similarly, but the values will be taken from the\n"
+                          "variables var1 and varN, you should pay attention to the * sign, it is required\n\n\n"
+                          "### Basic troubleshooting:\n"
+                          "Practice shows that the two main mistakes (on the user’s side) are: a lack of \n"
+                          "understanding of what this or that module actually does (for example, running DIV_NN_Dk to\n"
+                          "obtain the result of dividing natural numbers) and the incorrect format of the transferred\n"
+                          "data (incorrect number of arguments or their incorrect type ). Both problems can be solved\n"
+                          "by referring to the help for your module (HLP DIV_NN_Dk in this example)\n")
+
 
 class CmdManager:
     def __init__(self):
@@ -124,6 +168,8 @@ class CmdManager:
         }
 
     def process_cmd(self, cmd_string: str, window):
+        while cmd_string[-1] == " ":
+            cmd_string = cmd_string[0:-1]
         while "  " in cmd_string or " |" in cmd_string or "| " in cmd_string:
             cmd_string = cmd_string.replace("  ", " ")
             cmd_string = cmd_string.replace(" |", "|")
@@ -162,7 +208,6 @@ class PUT(AbstractCommand):
 class HLP(AbstractCommand):
     def execute(self, args, window: ConsoleApp):
         if len(args) == 0:
-
             return
         if len(args) != 1:
             raise ValueError("Invalid args for HLP command")
@@ -180,7 +225,6 @@ class HLP(AbstractCommand):
             for value in name_parser.names.keys():
                 window.display_text(value)
 
-
     def reference(self) -> str:
         return ("HLP (optional: module_name OR cmd_name) \nEither prints general reference for program\n"
                 "or if module_name is given prints reference for this specific module.")
@@ -188,7 +232,6 @@ class HLP(AbstractCommand):
 
 class CMD(AbstractCommand):
     def execute(self, args, window: ConsoleApp):
-        print(args)
         if len(args) != 2:
             raise ValueError("Invalid args for CMD command")
         cmd_name = args[0][0]
@@ -203,7 +246,10 @@ class CMD(AbstractCommand):
         if len(res) != len(args[0]):
             raise ValueError("Invalid args for CDM output")
         for i in range(len(args[0])):
-            window.var_stack[args[0][i]] = res[i]
+            if args[0][i] == "OUT":
+                window.display_text("Result #" + str(i) + ": " + str(res[i]))
+            else:
+                window.var_stack[args[0][i]] = res[i]
 
     def reference(self) -> str:
         return ("CMD [module_name] [var_name1] [var_name2] ... | [value1] [value2] ... \n"

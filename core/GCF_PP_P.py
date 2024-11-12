@@ -25,9 +25,9 @@ class GCF_PP_P(gm.AbstractModule):
         result_a = copy.deepcopy(args[0])  # Копии многочленов
         result_b = copy.deepcopy(args[1])
 
-        if self.deg.execute([result_a])[0].numbers[0] == 0:
+        if not self.nzer.execute([self.deg.execute([result_a])[0]])[0]:
             return [Polynomial([Rational(Integer(Natural([1]), True), Natural([1]))])]
-        if self.deg.execute([result_b])[0].numbers[0] == 0:
+        if not self.nzer.execute([self.deg.execute([result_b])[0]])[0]:
             return [Polynomial([Rational(Integer(Natural([1]), True), Natural([1]))])]
 
         # Алгоритм Евклида делением

@@ -43,11 +43,42 @@ from core.TRANS_N_Z import TRANS_N_Z
 from core.TRANS_Q_Z import TRANS_Q_Z
 from core.TRANS_Z_N import TRANS_Z_N
 from core.TRANS_Z_Q import TRANS_Z_Q
+# Дописанные модули:
+from core.custom_logic.OR_BB_B import OR_BB_B
+from core.custom_logic.EQ_BB_B import EQ_BB_B
+from core.custom_logic.AND_BB_B import AND_BB_B
+from core.custom_logic.NOT_B_B import NOT_B_B
+from core.custom_logic.XOR_BB_B import XOR_BB_B
+
+from core.custom_compare.GRE_NN_B import GRE_NN_B
+from core.custom_compare.GRE_ZZ_B import GRE_ZZ_B
+from core.custom_compare.GRE_QQ_B import GRE_QQ_B
+from core.custom_compare.EQ_NN_B import EQ_NN_B
+from core.custom_compare.EQ_ZZ_B import EQ_ZZ_B
+from core.custom_compare.EQ_QQ_B import EQ_QQ_B
+from core.custom_compare.GREQ_NN_B import GREQ_NN_B
+from core.custom_compare.GREQ_ZZ_B import GREQ_ZZ_B
+from core.custom_compare.GREQ_QQ_B import GREQ_QQ_B
 
 
 class ModuleNameParser:
     def __init__(self):
         self.names = dict()
+
+        self.names["GREQ_NN_B"] = GREQ_NN_B()
+        self.names["GREQ_ZZ_B"] = GREQ_ZZ_B()
+        self.names["GREQ_QQ_B"] = GREQ_QQ_B()
+        self.names["EQ_NN_B"] = EQ_NN_B()
+        self.names["EQ_ZZ_B"] = EQ_ZZ_B()
+        self.names["EQ_QQ_B"] = EQ_QQ_B()
+        self.names["GRE_NN_B"] = GRE_NN_B()
+        self.names["GRE_ZZ_B"] = GRE_ZZ_B()
+        self.names["GRE_QQ_B"] = GRE_QQ_B()
+        self.names["OR_BB_B"] = OR_BB_B()
+        self.names["EQ_BB_B"] = EQ_BB_B()
+        self.names["AND_BB_B"] = AND_BB_B()
+        self.names["NOT_B_B"] = NOT_B_B()
+        self.names["XOR_BB_B"] = XOR_BB_B()
         self.names["ABS_Z_N"] = ABS_Z_N()
         self.names["ADD_NN_N"] = ADD_NN_N()
         self.names["ADD_1N_N"] = ADD_1N_N()
@@ -74,7 +105,7 @@ class ModuleNameParser:
         self.names["MUL_ND_N"] = MUL_ND_N()
         self.names["MUL_Nk_N"] = MUL_Nk_N()
         self.names["MUL_NN_N"] = MUL_NN_N()
-        self.names["MUL_PP_P"] = MUL_PP_P()  # Исправлено: должно быть MUL_PP_P
+        self.names["MUL_PP_P"] = MUL_PP_P()
         self.names["MUL_PQ_P"] = MUL_PQ_P()
         self.names["MUL_Pxk_P"] = MUL_Pxk_P()
         self.names["MUL_QQ_Q"] = MUL_QQ_Q()
@@ -93,8 +124,6 @@ class ModuleNameParser:
         self.names["TRANS_Q_Z"] = TRANS_Q_Z()
         self.names["TRANS_Z_N"] = TRANS_Z_N()
         self.names["TRANS_Z_Q"] = TRANS_Z_Q()
-        #дописать тут
-
 
     def parse(self, string):
         print(string)

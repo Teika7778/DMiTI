@@ -12,6 +12,10 @@ class DataTypeParser:
     def str_to_datatype(self, string: str):
         if len(string) == 0:
             raise ValueError("Empty string")
+        if string == 'TRUE':
+            return True
+        if string == 'FALSE':
+            return False
         if string[0] == 'P':
             string = string[1:]
             return self.parse_polynomial(string)

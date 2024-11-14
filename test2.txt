@@ -1,0 +1,8 @@
+CMD SUB_NN_N counter | *counter 1
+CMD ADD_NN_N tmp | *var1 *var2
+PUT var1 *var2
+PUT var2 *tmp
+CMD EQ_NN_B flag | *counter 1
+CMD NOT_B_B flag | *flag
+SRF test2.txt *flag
+

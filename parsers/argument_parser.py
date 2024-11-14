@@ -15,7 +15,7 @@ class ArgumentParser:
             if string in var_stack:
                 return var_stack[string]
             else:
-                raise ValueError("No such var in var stack")
+                raise ValueError("No such var in var stack: " + string)
         else:
             pars = DataTypeParser()
             return pars.str_to_datatype(string)

@@ -1,0 +1,4 @@
+PUT var1 1
+PUT var2 1
+PUT counter 120
+SCR test2.txt

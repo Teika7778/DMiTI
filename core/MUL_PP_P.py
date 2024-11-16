@@ -16,8 +16,11 @@ class MUL_PP_P(gm.AbstractModule):
             raise ValueError("Improper arguments: function takes 2 arg")
         if not (isinstance(args[0], Polynomial) and isinstance(args[1], Polynomial)):
             raise ValueError("Invalid data type:  must be polynomial")
+        args[0], args[1] = args[1], args[0]
         result = Polynomial([Rational(Integer(Natural([0])), Natural([1]))]) # Нулевой многочлен
         for degree in range(len(args[1].coefficients)): # Цикл по элементам второго многочлен
+            if args[1].coefficients[degree].numerator.natural.numbers == [0]:
+                continue
             temp_result = self.mul_pq_p.execute([args[0], args[1].coefficients[degree]])[0]  # промежуточный результат - результат умножения
             degree_num = list(map(int, list(str(degree))[::-1]))
             temp_result = self.mul_pxk_p.execute([temp_result, Natural(degree_num)])[0] # всего P(x) на i-ый коэф Q(x) и умноженный на x^i

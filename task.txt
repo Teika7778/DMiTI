@@ -1,0 +1,8 @@
+# self.mul_pp = MUL_PP_P()
+# self.div = DIV_QQ_Q()
+# self.deg = DEG_P_N()
+# self.mul_xk = MUL_Pxk_P()
+# self.mul = MUL_PQ_P()
+# self.sub = SUB_PP_P()
+# self.red = RED_Q_Q()
+CMD DIV_PP_P OUT | 0:1,100:1 0:1,1:100

@@ -16,6 +16,7 @@ class ConsoleApp:
         self.available_types = ["INT", "NAT", "RAT", "POL"]
         self.type_codes = {Integer: "INT", Natural: "NAT", Rational: "RAT", Polynomial: "POL", bool: "BIN"}
         self.manager = CmdManager()
+        self.loader = CMDLoader()
 
         # Цвета для светлой темы
         self.bg_color = "#e0f7fa"  # светлый фон
@@ -95,7 +96,7 @@ class ConsoleApp:
             try:
                 self.manager.process_cmd(self.last_input, self)
             except ValueError as e:
-                self.display_text("Exception occurred:" + str(e.args))
+                self.display_text("Exception occurred:" + str(e.args[0]))
 
         self.update_right_area()
         # Очищаем поле ввода
@@ -151,6 +152,12 @@ class ConsoleApp:
                           "CMD ADD_NN_N OUT | 50 30 - pints the result of the 50+30 operation to the console\n"
                           "CMD ADD_NN_N OUT | *varN *var1 - similarly, but the values will be taken from the\n"
                           "variables var1 and varN, you should pay attention to the * sign, it is required\n\n\n"
+                          "### Loading scripts from file:\n"
+                          "To load a sequence of commands from a file, you need to write SCR [file_name], it is also\n"
+                          "possible to load commands under a condition, this condition is usually a Boolean variable.\n"
+                          "In this case, the syntax is: SRF [file_name] *[variable]. An example of working with files\n"
+                          "can be found in the repository (file test.txt). You can also add comments to files using "
+                          "#.\n\n\n"
                           "### Basic troubleshooting:\n"
                           "Practice shows that the two main mistakes (on the user’s side) are: a lack of \n"
                           "understanding of what this or that module actually does (for example, running DIV_NN_Dk to\n"
@@ -164,7 +171,9 @@ class CmdManager:
         self.commands_dict = {
             "CMD": CMD(),
             "PUT": PUT(),
-            "HLP": HLP()
+            "HLP": HLP(),
+            "SCR": SCR(),
+            "SRF": SRF()
         }
 
     def process_cmd(self, cmd_string: str, window):
@@ -215,15 +224,13 @@ class HLP(AbstractCommand):
         if args[0] in name_parser.names:
             mod = name_parser.parse(args[0])
             window.display_text(mod.reference())
-        if args[0] == "HLP":
-            window.display_text(self.reference())
-        if args[0] == "CMD":
-            window.display_text(CMD().reference())
-        if args[0] == "PUT":
-            window.display_text(PUT().reference())
+
+        if args[0] in window.manager.commands_dict:
+            window.display_text(window.manager.commands_dict[args[0]].reference())
         if args[0] == "LIST":
             for value in name_parser.names.keys():
-                window.display_text(value)
+                parsed = name_parser.parse(value)
+                window.display_text(value + ' : ' + parsed.reference().split('\n')[0])
 
     def reference(self) -> str:
         return ("HLP (optional: module_name OR cmd_name) \nEither prints general reference for program\n"
@@ -254,6 +261,76 @@ class CMD(AbstractCommand):
     def reference(self) -> str:
         return ("CMD [module_name] [var_name1] [var_name2] ... | [value1] [value2] ... \n"
                 "Executes given module with given values and writes results to var_name1, var_name2")
+
+
+class SCR(AbstractCommand):
+    def execute(self, args, window: ConsoleApp):
+        if len(args) != 1:
+            raise ValueError("Invalid args for SCR command")
+        file = open(args[0], 'r')
+        text = file.read()
+        file.close()
+        window.loader.load(text)
+        window.loader.run(window)
+
+    def reference(self) -> str:
+        return ("SCR [file_name] \n"
+                "Load all commands from given file")
+
+
+class SRF(AbstractCommand):
+    def execute(self, args, window: ConsoleApp):
+        if len(args) != 2:
+            raise ValueError("Invalid args for SCR command")
+        parser = ArgumentParser()
+        res = parser.parse(args[1], window.var_stack)
+        if not isinstance(res, bool):
+            raise ValueError("Invalid args type for SCR command")
+
+        if not res:
+            return
+        file = open(args[0], 'r')
+        text = file.read()
+        file.close()
+        window.loader.load(text)
+        window.loader.run(window)
+
+    def reference(self) -> str:
+        return ("SRF [file_name] [condition]\n"
+                "Load all commands from given file if condition is TRUE")
+
+
+class CMDLoader:
+    def __init__(self):
+        self.cmd_q = []
+        self.running = False
+
+    def load(self, cmd_block: str):
+        split = cmd_block.split('\n')
+        split_clear = []
+        for st in split:
+            if len(st) == 0:
+                continue
+            while st[0] in '\t ' and len(st) > 1:
+                st = st[1:]
+            if len(st) == 1 or st[0] == '#':
+                continue
+            split_clear.append(st)
+        if self.running:
+            self.cmd_q = [self.cmd_q[0]] + split_clear
+        else:
+            self.cmd_q = split_clear
+
+    def run(self, window: ConsoleApp):
+        if self.running:
+            return
+        self.running = True
+        while len(self.cmd_q) > 0:
+            window.manager.process_cmd(self.cmd_q[0], window)
+            self.cmd_q = self.cmd_q[1:]
+
+        window.update_right_area()
+        self.running = False
 
 
 # Создаем основное окно и запускаем приложение

@@ -316,7 +316,7 @@ class OUT(AbstractCommand):
         raise ValueError()
 
     def reference(self) -> str:
-        pass
+        return "OUT *[var] [optional: file]"
 
 
 class CMDLoader:

@@ -12,6 +12,8 @@ class DataTypeParser:
     def str_to_datatype(self, string: str):
         if len(string) == 0:
             raise ValueError("Empty string")
+        if ':' in string:
+            return self.parse_polynomial_alt(string)
         if string == 'TRUE':
             return True
         if string == 'FALSE':
@@ -45,6 +47,7 @@ class DataTypeParser:
             return Integer(self.parse_natural(string[1:]))
         if string[0] == '-':
             return Integer(self.parse_natural(string[1:]), is_positive=False)
+        return Integer(self.parse_natural(string))
 
     def parse_rational(self, string: str):
         if len(string) == 0:
@@ -69,3 +72,14 @@ class DataTypeParser:
             coefficient_t = self.parse_rational(coefficient)
             coefficients_t.append(coefficient_t)
         return Polynomial(coefficients_t)
+
+    def parse_polynomial_alt(self, string: str):
+        pairs = string.split(',')
+        coefficients = []
+        for pair in pairs:
+            degree = int(pair.split(':')[0])
+            value = self.parse_rational(pair.split(':')[1])
+            while degree >= len(coefficients):
+                coefficients.append(self.parse_rational("+0/1"))
+            coefficients[degree] = value
+        return Polynomial(coefficients)

@@ -5,4 +5,4 @@
 # self.mul = MUL_PQ_P()
 # self.sub = SUB_PP_P()
 # self.red = RED_Q_Q()
-CMD DIV_PP_P OUT | 0:1,100:1 0:1,1:100
+CMD DIV_PP_P O | 0:1,200:1 0:1,1:100

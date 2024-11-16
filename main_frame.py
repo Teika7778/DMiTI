@@ -173,7 +173,8 @@ class CmdManager:
             "PUT": PUT(),
             "HLP": HLP(),
             "SCR": SCR(),
-            "SRF": SRF()
+            "SRF": SRF(),
+            "OUT": OUT()
         }
 
     def process_cmd(self, cmd_string: str, window):
@@ -298,6 +299,24 @@ class SRF(AbstractCommand):
     def reference(self) -> str:
         return ("SRF [file_name] [condition]\n"
                 "Load all commands from given file if condition is TRUE")
+
+
+class OUT(AbstractCommand):
+    def execute(self, args, window: ConsoleApp):
+        p = ArgumentParser()
+        if len(args) == 2:
+            file = open(args[1], 'w')
+
+            file.write(str(p.parse(args[0], window.var_stack)))
+            file.close()
+            return
+        if len(args) == 1:
+            window.display_text("OUT: " + str(p.parse(args[0], window.var_stack)))
+            return
+        raise ValueError()
+
+    def reference(self) -> str:
+        pass
 
 
 class CMDLoader:

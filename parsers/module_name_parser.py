@@ -60,11 +60,17 @@ from core.custom_compare.GREQ_NN_B import GREQ_NN_B
 from core.custom_compare.GREQ_ZZ_B import GREQ_ZZ_B
 from core.custom_compare.GREQ_QQ_B import GREQ_QQ_B
 
+from core.custom_poly_util.GET_PN_Q import GET_PN_Q
+from core.custom_poly_util.SET_PNQ_P import SET_PNQ_P
+from core.custom_poly_util.RED_P_P import RED_P_P
+
 
 class ModuleNameParser:
     def __init__(self):
         self.names = dict()
-
+        self.names["RED_P_P"] = RED_P_P()
+        self.names["SET_PNQ_P"] = SET_PNQ_P()
+        self.names["GET_PN_Q"] = GET_PN_Q()
         self.names["GREQ_NN_B"] = GREQ_NN_B()
         self.names["GREQ_ZZ_B"] = GREQ_ZZ_B()
         self.names["GREQ_QQ_B"] = GREQ_QQ_B()
@@ -126,7 +132,6 @@ class ModuleNameParser:
         self.names["TRANS_Z_Q"] = TRANS_Z_Q()
 
     def parse(self, string):
-        print(string)
         if string not in self.names:
             raise ValueError("No such module")
         return self.names[string]

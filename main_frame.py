@@ -96,7 +96,7 @@ class ConsoleApp:
             try:
                 self.manager.process_cmd(self.last_input, self)
             except ValueError as e:
-                self.display_text("Exception occurred:" + str(e.args))
+                self.display_text("Exception occurred:" + str(e.args[0]))
 
         self.update_right_area()
         # Очищаем поле ввода
@@ -152,6 +152,12 @@ class ConsoleApp:
                           "CMD ADD_NN_N OUT | 50 30 - pints the result of the 50+30 operation to the console\n"
                           "CMD ADD_NN_N OUT | *varN *var1 - similarly, but the values will be taken from the\n"
                           "variables var1 and varN, you should pay attention to the * sign, it is required\n\n\n"
+                          "### Loading scripts from file:\n"
+                          "To load a sequence of commands from a file, you need to write SCR [file_name], it is also\n"
+                          "possible to load commands under a condition, this condition is usually a Boolean variable.\n"
+                          "In this case, the syntax is: SRF [file_name] *[variable]. An example of working with files\n"
+                          "can be found in the repository (file test.txt). You can also add comments to files using "
+                          "#.\n\n\n"
                           "### Basic troubleshooting:\n"
                           "Practice shows that the two main mistakes (on the user’s side) are: a lack of \n"
                           "understanding of what this or that module actually does (for example, running DIV_NN_Dk to\n"
@@ -223,7 +229,8 @@ class HLP(AbstractCommand):
             window.display_text(window.manager.commands_dict[args[0]].reference())
         if args[0] == "LIST":
             for value in name_parser.names.keys():
-                window.display_text(value)
+                parsed = name_parser.parse(value)
+                window.display_text(value + ' : ' + parsed.reference().split('\n')[0])
 
     def reference(self) -> str:
         return ("HLP (optional: module_name OR cmd_name) \nEither prints general reference for program\n"
@@ -267,7 +274,8 @@ class SCR(AbstractCommand):
         window.loader.run(window)
 
     def reference(self) -> str:
-        pass
+        return ("SCR [file_name] \n"
+                "Load all commands from given file")
 
 
 class SRF(AbstractCommand):
@@ -288,7 +296,9 @@ class SRF(AbstractCommand):
         window.loader.run(window)
 
     def reference(self) -> str:
-        pass
+        return ("SRF [file_name] [condition]\n"
+                "Load all commands from given file if condition is TRUE")
+
 
 class CMDLoader:
     def __init__(self):

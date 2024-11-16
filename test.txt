@@ -1,4 +1,6 @@
+# Init vars
 PUT var1 1
 PUT var2 1
-PUT counter 120
+PUT counter 1000
+# Starting loop
 SCR test2.txt
